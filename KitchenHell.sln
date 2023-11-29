@@ -1,0 +1,47 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KitchenHell.Orders.Api", "src\KitchenHell.Orders.Api\KitchenHell.Orders.Api.csproj", "{D88D2B72-9652-4809-B57F-2BD0D7F1D35E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution", "solution", "{5D935BA3-CE4F-4B00-A6F0-D8FC08B35DCB}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
+		NuGet.Config = NuGet.Config
+		global.json = global.json
+		Directory.Packages.props = Directory.Packages.props
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{36A88B30-230D-4338-9139-5F11A1A20FBF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KitchenHell.Orders.Persistence", "src\KitchenHell.Orders.Persistence\KitchenHell.Orders.Persistence.csproj", "{5509C7B4-9493-4451-AA0B-F6FEF80FC407}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "compose", "compose", "{C4C69B62-E5EB-4767-80F2-24DDC534E278}"
+	ProjectSection(SolutionItems) = preProject
+		compose\docker-compose.yml = compose\docker-compose.yml
+		compose\init.sql = compose\init.sql
+		compose\gates.entrypoint.sh = compose\gates.entrypoint.sh
+		compose\database-dummy-data.entrypoint.sql = compose\database-dummy-data.entrypoint.sql
+		compose\database-dummy-data.entrypoint.sh = compose\database-dummy-data.entrypoint.sh
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D88D2B72-9652-4809-B57F-2BD0D7F1D35E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D88D2B72-9652-4809-B57F-2BD0D7F1D35E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D88D2B72-9652-4809-B57F-2BD0D7F1D35E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D88D2B72-9652-4809-B57F-2BD0D7F1D35E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5509C7B4-9493-4451-AA0B-F6FEF80FC407}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5509C7B4-9493-4451-AA0B-F6FEF80FC407}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5509C7B4-9493-4451-AA0B-F6FEF80FC407}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5509C7B4-9493-4451-AA0B-F6FEF80FC407}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D88D2B72-9652-4809-B57F-2BD0D7F1D35E} = {36A88B30-230D-4338-9139-5F11A1A20FBF}
+		{5509C7B4-9493-4451-AA0B-F6FEF80FC407} = {36A88B30-230D-4338-9139-5F11A1A20FBF}
+		{C4C69B62-E5EB-4767-80F2-24DDC534E278} = {5D935BA3-CE4F-4B00-A6F0-D8FC08B35DCB}
+	EndGlobalSection
+EndGlobal

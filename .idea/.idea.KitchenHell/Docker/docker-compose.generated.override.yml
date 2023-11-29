@@ -1,0 +1,20 @@
+# This is a generated file. Not intended for manual editing.
+services:
+  orders-api:
+    build:
+      context: "/home/klappo/workspace/learn/KitchenHell"
+      dockerfile: "./src/KitchenHell.Orders.Api/Dockerfile"
+      target: "build"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/net8.0/KitchenHell.Orders.Api.dll"
+    environment:
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+    image: "kitchenhell-orders-api:dev"
+    ports: []
+    volumes:
+    - "/home/klappo/.nuget/packages:/root/.nuget/packages"
+    - "/home/klappo/workspace/learn/KitchenHell/src/KitchenHell.Orders.Api:/app:rw"
+    - "/home/klappo/workspace/learn/KitchenHell:/src:rw"
+    working_dir: "/app"

@@ -1,0 +1,52 @@
+﻿# kitchen-hell
+name: kh
+services:
+  orders-api:
+    image: kitchenhell-orders-api
+    build:
+      context: ../
+      dockerfile: ./src/KitchenHell.Orders.Api/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__Orders=Server=database;Initial Catalog=kh;User Id=kitchen;Password=OpenAI@2023;Persist Security Info=False;Encrypt=False;Connection Timeout=30;
+    depends_on:
+      database-gates:
+        condition: service_completed_successfully
+    ports:
+      - 9081:8080
+  
+  database-dummy-data:
+    image: mcr.microsoft.com/mssql-tools:latest
+    command: ""
+    entrypoint: /bin/bash -c "/tools/database-dummy-data.entrypoint.sh"
+    environment:
+      - MSSQL_SA_PASSWORD=Kitchen#2023
+    volumes:
+      - ./:/tools
+    depends_on:
+      orders-api:
+        condition: service_started
+
+  database-gates:
+    image: mcr.microsoft.com/mssql-tools
+    command: ""
+    entrypoint: /bin/bash -c "/tools/gates.entrypoint.sh"
+    environment:
+      - MSSQL_SA_PASSWORD=Kitchen#2023
+    volumes:
+      - ./:/tools
+    depends_on:
+      - database
+
+  database:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=Kitchen#2023
+    ports:
+      - 2433:1433
+#    volumes:
+#      - database:/var/opt/mssql
+
+#volumes:
+#  database:
