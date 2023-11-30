@@ -1,0 +1,27 @@
+syntax = "proto3";
+option csharp_namespace = "KitchenHell.GrpcGen.Restaurants";
+
+import "google/protobuf/wrappers.proto";
+
+service RestaurantsSvc {
+  rpc GetAllRestaurants(GetAllRestaurantsRequest) returns (GetAllRestaurantsResponse);
+}
+
+message GetAllRestaurantsRequest
+{
+}
+
+message GetAllRestaurantsResponse
+{
+  repeated Restaurant restaurants = 1;
+}
+
+message Restaurant
+{
+  int64 id = 1;
+  string name = 2;
+  string full_address = 3;
+  double latitude = 4;
+  double longitude = 5;
+}
+

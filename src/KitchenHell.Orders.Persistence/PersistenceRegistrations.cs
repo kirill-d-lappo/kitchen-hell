@@ -1,12 +1,16 @@
+using KitchenHell.Orders.Business.Orders.Services;
+using KitchenHell.Orders.Persistence.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace KitchenHell.Orders.Persistence;
 
 public static class PersistenceRegistrations
 {
-    public static void AddPersistence(this IServiceCollection services)
+    public static void AddOrdersPersistence(this IServiceCollection services)
     {
         services.AddPooledDbContextFactory<OrdersDbContext>(
             options => { options.UseOrdersDatabase(); });
+
+        services.AddScoped<IOrderRepository, OrderRepository>();
     }
 }

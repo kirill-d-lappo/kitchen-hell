@@ -1,4 +1,6 @@
-namespace KitchenHell.Orders.Api.Grpcs.Utils;
+using Microsoft.Extensions.Configuration;
+
+namespace KitchenHell.Common.GrpcServices;
 
 /// <summary>
 /// Helper method to bind configuration to grpc client options object.

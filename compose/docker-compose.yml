@@ -1,6 +1,20 @@
 ﻿# kitchen-hell
 name: kh
 services:
+  restaurant-api:
+    image: kitchenhell-restaurants-api
+    build:
+      context: ../
+      dockerfile: ./src/KitchenHell.Restaurants.Api/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__Restaurants=Server=database;Initial Catalog=kh;User Id=kitchen;Password=OpenAI@2023;Persist Security Info=False;Encrypt=False;Connection Timeout=30;
+    depends_on:
+      database-gates:
+        condition: service_completed_successfully
+    ports:
+      - 9082:8080
+
   orders-api:
     image: kitchenhell-orders-api
     build:
@@ -25,6 +39,8 @@ services:
       - ./:/tools
     depends_on:
       orders-api:
+        condition: service_started
+      restaurant-api:
         condition: service_started
 
   database-gates:

@@ -1,9 +1,12 @@
-namespace KitchenHell.Orders.Api.Grpcs.Utils;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+
+namespace KitchenHell.Common.GrpcServices;
 
 /// <summary>
 /// Helper methods for grpc client registration.
 /// </summary>
-public static class GrpcClientRegistrationHelpers
+public static class GrpcClientRegistrations
 {
     /// <summary>
     /// Registers named Grpc client and applies configuration on it.

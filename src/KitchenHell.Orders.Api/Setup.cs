@@ -1,9 +1,9 @@
-using KitchenHell.Orders.Api.Business;
+using KitchenHell.Common.GrpcServices;
+using KitchenHell.Common.Web;
 using KitchenHell.Orders.Api.Grpcs;
+using KitchenHell.Orders.Business;
 using KitchenHell.Orders.Persistence;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Diagnostics.HealthChecks;
-using Serilog;
 
 namespace KitchenHell.Orders.Api;
 
@@ -11,37 +11,13 @@ internal static class Setup
 {
     public static WebApplicationBuilder Configure(this WebApplicationBuilder builder)
     {
-        builder.Services.AddBusiness();
-        builder.Services.AddPersistence();
+        builder.Services.AddOrdersBusiness();
+        builder.Services.AddOrdersPersistence();
 
         builder.Services.AddHealthChecks();
 
-        builder.Services.AddGrpc();
-        builder.Services.AddGrpcReflection();
-        builder.Services.AddGrpcHealthChecks()
-            .AddCheck("live", () => HealthCheckResult.Healthy());
-
-        builder.Host.UseSerilog(
-            (context, services, config) =>
-            {
-                config.MinimumLevel.Warning();
-
-                config.WriteTo.Async(
-                    wt =>
-                    {
-                        wt.Console(
-                            outputTemplate:
-                            "[{Timestamp:HH:mm:ss}] [{Level:u4}] <s:{SourceContext}> {Message:lj}{NewLine}{Exception}");
-                    });
-
-                config.Destructure.ToMaximumDepth(2);
-                config.Destructure.ToMaximumStringLength(60);
-                config.Destructure.ToMaximumCollectionCount(10);
-
-                config
-                    .ReadFrom.Configuration(context.Configuration)
-                    .ReadFrom.Services(services);
-            });
+        builder.Services.AddGrpcServices();
+        builder.Host.AddLogging();
 
         return builder;
     }

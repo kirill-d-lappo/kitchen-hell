@@ -1,4 +1,4 @@
-namespace KitchenHell.Orders.Api.Business.Common;
+namespace KitchenHell.Orders.Business.Common;
 
 public interface IDateTimeProvider
 {

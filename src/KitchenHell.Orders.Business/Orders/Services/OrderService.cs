@@ -1,6 +1,6 @@
-using KitchenHell.Orders.Api.Business.Common;
+using KitchenHell.Orders.Business.Common;
 
-namespace KitchenHell.Orders.Api.Business.Orders.Services;
+namespace KitchenHell.Orders.Business.Orders.Services;
 
 internal class OrderService : IOrderService
 {
@@ -18,6 +18,7 @@ internal class OrderService : IOrderService
         var now = _dateTimeProvider.UtcNow;
         var order = new Order();
 
+        order.RestaurantId = createParams.RestaurantId;
         order.CreatedAt = createParams.CreatedAt.GetValueOrDefault(now);
 
         var orderId = await _orderRepository.InsertAsync(order, ct);

@@ -1,4 +1,4 @@
-namespace KitchenHell.Orders.Api.Business.Orders.Services;
+namespace KitchenHell.Orders.Business.Orders.Services;
 
 public interface IOrderRepository
 {

@@ -1,8 +1,9 @@
-using KitchenHell.Orders.Persistence;
+using KitchenHell.Orders.Business.Orders;
+using KitchenHell.Orders.Business.Orders.Services;
 using KitchenHell.Orders.Persistence.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace KitchenHell.Orders.Api.Business.Orders.Services;
+namespace KitchenHell.Orders.Persistence.Services;
 
 internal class OrderRepository : IOrderRepository
 {
@@ -38,14 +39,16 @@ internal class OrderRepository : IOrderRepository
         return order;
     }
 
-    private static void MapToModel(OrderEntity orderEntity, Order order)
+    private static void MapToModel(OrderEntity from, Order to)
     {
-        order.Id = orderEntity.Id;
-        order.CreatedAt = orderEntity.CreatedAt;
+        to.Id = from.Id;
+        to.CreatedAt = from.CreatedAt;
+        to.RestaurantId = from.RestaurantId;
     }
 
-    private static void MapToEntity(Order order, OrderEntity orderEntity)
+    private static void MapToEntity(Order from, OrderEntity to)
     {
-        orderEntity.CreatedAt = order.CreatedAt;
+        to.RestaurantId = from.RestaurantId;
+        to.CreatedAt = from.CreatedAt;
     }
 }

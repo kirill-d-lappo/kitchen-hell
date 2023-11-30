@@ -1,7 +1,7 @@
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using KitchenHell.GrpcGen.Orders;
-using KitchenHell.Orders.Api.Business.Orders.Services;
+using KitchenHell.Orders.Business.Orders.Services;
 
 namespace KitchenHell.Orders.Api.Grpcs;
 
@@ -18,6 +18,7 @@ public class OrdersGrpcServer : OrdersSvc.OrdersSvcBase
     {
         var createParams = new CreateOrderParams
         {
+            RestaurantId = request.RestaurantId,
             CreatedAt = request.CreatedAt?.ToDateTimeOffset(),
         };
 

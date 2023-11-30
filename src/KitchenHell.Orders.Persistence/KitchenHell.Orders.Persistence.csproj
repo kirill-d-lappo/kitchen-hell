@@ -13,4 +13,7 @@
         <Using Include="System.ComponentModel.DataAnnotations" />
         <Using Include="System.ComponentModel.DataAnnotations.Schema" />
     </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\KitchenHell.Orders.Business\KitchenHell.Orders.Business.csproj" />
+    </ItemGroup>
 </Project>

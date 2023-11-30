@@ -24,6 +24,20 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "compose", "compose", "{C4C6
 		compose\database-dummy-data.entrypoint.sh = compose\database-dummy-data.entrypoint.sh
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KitchenHell.Restaurants.Api", "src\KitchenHell.Restaurants.Api\KitchenHell.Restaurants.Api.csproj", "{0B0A74B9-DB13-435E-8B0C-430D3B02CB37}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KitchenHell.Restaurants.Persistence", "src\KitchenHell.Restaurants.Persistence\KitchenHell.Restaurants.Persistence.csproj", "{22F729EF-0FD6-459E-AB91-02795C088353}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "common", "common", "{7EA063B0-8CA5-4AF5-8C13-83DDCF194103}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KitchenHell.Common.GrpcServices", "src\KitchenHell.Common.GrpcServices\KitchenHell.Common.GrpcServices.csproj", "{A7E41378-009D-4D57-8785-7B8847E18633}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KitchenHell.Common.Web", "src\KitchenHell.Common.Web\KitchenHell.Common.Web.csproj", "{6D8EC475-89BE-4AC1-B068-18672606E971}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KitchenHell.Orders.Business", "src\KitchenHell.Orders.Business\KitchenHell.Orders.Business.csproj", "{280B3445-2512-4A2E-9960-15EEA7119B03}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KitchenHell.Restaurants.Business", "src\KitchenHell.Restaurants.Business\KitchenHell.Restaurants.Business.csproj", "{F986ADED-50DC-4649-9642-D850F6E050A5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,10 +52,40 @@ Global
 		{5509C7B4-9493-4451-AA0B-F6FEF80FC407}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5509C7B4-9493-4451-AA0B-F6FEF80FC407}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5509C7B4-9493-4451-AA0B-F6FEF80FC407}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B0A74B9-DB13-435E-8B0C-430D3B02CB37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B0A74B9-DB13-435E-8B0C-430D3B02CB37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B0A74B9-DB13-435E-8B0C-430D3B02CB37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B0A74B9-DB13-435E-8B0C-430D3B02CB37}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22F729EF-0FD6-459E-AB91-02795C088353}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22F729EF-0FD6-459E-AB91-02795C088353}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22F729EF-0FD6-459E-AB91-02795C088353}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22F729EF-0FD6-459E-AB91-02795C088353}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7E41378-009D-4D57-8785-7B8847E18633}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7E41378-009D-4D57-8785-7B8847E18633}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7E41378-009D-4D57-8785-7B8847E18633}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7E41378-009D-4D57-8785-7B8847E18633}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D8EC475-89BE-4AC1-B068-18672606E971}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D8EC475-89BE-4AC1-B068-18672606E971}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D8EC475-89BE-4AC1-B068-18672606E971}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D8EC475-89BE-4AC1-B068-18672606E971}.Release|Any CPU.Build.0 = Release|Any CPU
+		{280B3445-2512-4A2E-9960-15EEA7119B03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{280B3445-2512-4A2E-9960-15EEA7119B03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{280B3445-2512-4A2E-9960-15EEA7119B03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{280B3445-2512-4A2E-9960-15EEA7119B03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F986ADED-50DC-4649-9642-D850F6E050A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F986ADED-50DC-4649-9642-D850F6E050A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F986ADED-50DC-4649-9642-D850F6E050A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F986ADED-50DC-4649-9642-D850F6E050A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{D88D2B72-9652-4809-B57F-2BD0D7F1D35E} = {36A88B30-230D-4338-9139-5F11A1A20FBF}
 		{5509C7B4-9493-4451-AA0B-F6FEF80FC407} = {36A88B30-230D-4338-9139-5F11A1A20FBF}
 		{C4C69B62-E5EB-4767-80F2-24DDC534E278} = {5D935BA3-CE4F-4B00-A6F0-D8FC08B35DCB}
+		{0B0A74B9-DB13-435E-8B0C-430D3B02CB37} = {36A88B30-230D-4338-9139-5F11A1A20FBF}
+		{22F729EF-0FD6-459E-AB91-02795C088353} = {36A88B30-230D-4338-9139-5F11A1A20FBF}
+		{A7E41378-009D-4D57-8785-7B8847E18633} = {7EA063B0-8CA5-4AF5-8C13-83DDCF194103}
+		{6D8EC475-89BE-4AC1-B068-18672606E971} = {7EA063B0-8CA5-4AF5-8C13-83DDCF194103}
+		{280B3445-2512-4A2E-9960-15EEA7119B03} = {36A88B30-230D-4338-9139-5F11A1A20FBF}
+		{F986ADED-50DC-4649-9642-D850F6E050A5} = {36A88B30-230D-4338-9139-5F11A1A20FBF}
 	EndGlobalSection
 EndGlobal

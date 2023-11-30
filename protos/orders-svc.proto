@@ -10,7 +10,8 @@ service OrdersSvc {
 
 message CreateOrderRequest
 {
-  optional google.protobuf.Timestamp createdAt = 1;
+  int64 restaurant_id = 1;
+  optional google.protobuf.Timestamp createdAt = 2;
 }
 
 message CreateOrderResponse
