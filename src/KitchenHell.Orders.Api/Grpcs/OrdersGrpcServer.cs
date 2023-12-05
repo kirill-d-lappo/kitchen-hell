@@ -16,13 +16,14 @@ public class OrdersGrpcServer : OrdersSvc.OrdersSvcBase
 
     public override async Task<CreateOrderResponse> CreateOrder(CreateOrderRequest request, ServerCallContext context)
     {
+        var ct = context.CancellationToken;
         var createParams = new CreateOrderParams
         {
             RestaurantId = request.RestaurantId,
             CreatedAt = request.CreatedAt?.ToDateTimeOffset(),
         };
 
-        var orderId = await _orderService.CreateOrderAsync(createParams, context.CancellationToken);
+        var orderId = await _orderService.CreateOrderAsync(createParams, ct);
         var result = new CreateOrderResponse
         {
             OrderId = orderId,

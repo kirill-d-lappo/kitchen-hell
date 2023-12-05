@@ -4,4 +4,8 @@
         <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
     </ItemGroup>
 
+    <ItemGroup>
+        <ProjectReference Include="..\KitchenHell.Messaging.Kafka\KitchenHell.Messaging.Kafka.csproj" />
+    </ItemGroup>
+
 </Project>

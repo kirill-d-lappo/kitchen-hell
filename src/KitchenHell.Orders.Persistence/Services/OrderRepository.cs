@@ -2,16 +2,19 @@ using KitchenHell.Orders.Business.Orders;
 using KitchenHell.Orders.Business.Orders.Services;
 using KitchenHell.Orders.Persistence.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace KitchenHell.Orders.Persistence.Services;
 
 internal class OrderRepository : IOrderRepository
 {
     private readonly IDbContextFactory<OrdersDbContext> _dbContextFactory;
+    private readonly ILogger<OrderRepository> _logger;
 
-    public OrderRepository(IDbContextFactory<OrdersDbContext> dbContextFactory)
+    public OrderRepository(IDbContextFactory<OrdersDbContext> dbContextFactory, ILogger<OrderRepository> logger)
     {
         _dbContextFactory = dbContextFactory;
+        _logger = logger;
     }
 
     public async Task<long> InsertAsync(Order order, CancellationToken ct)
@@ -37,6 +40,42 @@ internal class OrderRepository : IOrderRepository
         MapToModel(orderEntity, order);
 
         return order;
+    }
+
+    public async Task UpdateOrderStatusAsync(long id, OrderStatus status, CancellationToken ct)
+    {
+        await using var dbContext = await _dbContextFactory.CreateDbContextAsync(ct);
+
+        var orderEntity = await dbContext.Orders.FirstOrDefaultAsync(o => o.Id == id, ct);
+
+        if (orderEntity == default)
+        {
+            _logger.LogError("Order with id {OrderId} was not found and can not be set to status {Status}", id, status);
+
+            return;
+        }
+
+        orderEntity.OrderStatus = status;
+
+        await dbContext.SaveChangesAsync(ct);
+    }
+
+    public async Task UpdateRestaurantOrderStatusAsync(long id, OrderRestaurantStatus status, CancellationToken ct)
+    {
+        await using var dbContext = await _dbContextFactory.CreateDbContextAsync(ct);
+
+        var orderEntity = await dbContext.Orders.FirstOrDefaultAsync(o => o.Id == id, ct);
+
+        if (orderEntity == default)
+        {
+            _logger.LogError("Order with id {OrderId} was not found and can not be set to status {Status}", id, status);
+
+            return;
+        }
+
+        orderEntity.RestaurantStatus = status;
+
+        await dbContext.SaveChangesAsync(ct);
     }
 
     private static void MapToModel(OrderEntity from, Order to)

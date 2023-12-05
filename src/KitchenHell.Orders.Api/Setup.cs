@@ -2,6 +2,7 @@ using KitchenHell.Common.GrpcServices;
 using KitchenHell.Common.Web;
 using KitchenHell.Orders.Api.Grpcs;
 using KitchenHell.Orders.Business;
+using KitchenHell.Orders.Business.Messages;
 using KitchenHell.Orders.Persistence;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,6 +19,8 @@ internal static class Setup
 
         builder.Services.AddGrpcServices();
         builder.Host.AddLogging();
+
+        builder.Services.AddOrdersMessaging();
 
         return builder;
     }
