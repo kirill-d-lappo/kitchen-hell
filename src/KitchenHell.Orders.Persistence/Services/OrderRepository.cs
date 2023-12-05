@@ -44,11 +44,17 @@ internal class OrderRepository : IOrderRepository
         to.Id = from.Id;
         to.CreatedAt = from.CreatedAt;
         to.RestaurantId = from.RestaurantId;
+        to.OrderStatus = from.OrderStatus;
+        to.RestaurantStatus = from.RestaurantStatus;
+        to.DeliveryStatus = from.DeliveryStatus;
     }
 
     private static void MapToEntity(Order from, OrderEntity to)
     {
         to.RestaurantId = from.RestaurantId;
         to.CreatedAt = from.CreatedAt;
+        to.OrderStatus = from.OrderStatus;
+        to.RestaurantStatus = from.RestaurantStatus;
+        to.DeliveryStatus = from.DeliveryStatus;
     }
 }

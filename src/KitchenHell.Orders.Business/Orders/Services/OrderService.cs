@@ -20,6 +20,9 @@ internal class OrderService : IOrderService
 
         order.RestaurantId = createParams.RestaurantId;
         order.CreatedAt = createParams.CreatedAt.GetValueOrDefault(now);
+        order.OrderStatus = OrderStatus.Created;
+        order.RestaurantStatus = OrderRestaurantStatus.Pending;
+        order.DeliveryStatus = OrderDeliveryStatus.Pending;
 
         var orderId = await _orderRepository.InsertAsync(order, ct);
 
