@@ -13,8 +13,8 @@ RUN dotnet build "./src/KitchenHell.Restaurants.Api" -c $BUILD_CONFIGURATION --n
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "KitchenHell.Restaurants.Api" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false --no-restore --no-build
-RUN dotnet ef migrations bundle -p "KitchenHell.Restaurants.Persistence/"  \
+RUN dotnet publish "./src/KitchenHell.Restaurants.Api" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false --no-restore --no-build
+RUN dotnet ef migrations bundle -p "./src/KitchenHell.Restaurants.Persistence/"  \
     -r linux-x64  \
     --configuration $BUILD_CONFIGURATION  \
     -o /app/publish/efbundle  \
