@@ -1,6 +1,6 @@
 set -e
 
-sleepTime=20s
+sleepTime=5s
 echo "Waiting for $sleepTime to let the db warm up"
 sleep $sleepTime
 

@@ -40,13 +40,15 @@ services:
     volumes:
       - ./:/tools
     depends_on:
+      database-gates:
+        condition: service_completed_successfully
       orders-api:
         condition: service_started
       restaurant-api:
         condition: service_started
 
   database-gates:
-    image: mcr.microsoft.com/mssql-tools
+    image: mcr.microsoft.com/mssql/server:2022-latest
     command: ""
     entrypoint: /bin/bash -c "/tools/gates.entrypoint.sh"
     environment:
