@@ -1,11 +1,10 @@
 using KitchenHell.Api.Grpc;
 using KitchenHell.Common.GrpcServices;
 using KitchenHell.Common.Web;
-using KitchenHell.Orders.Business;
-using KitchenHell.Orders.Business.Messages;
-using KitchenHell.Orders.Persistence;
-using KitchenHell.Restaurants.Business;
-using KitchenHell.Restaurants.Persistence;
+using KitchenHell.Business;
+using KitchenHell.Business.Orders.Messages;
+using KitchenHell.Persistence.Orders;
+using KitchenHell.Persistence.Restaurants;
 using Microsoft.EntityFrameworkCore;
 
 namespace KitchenHell.Api;
@@ -14,10 +13,8 @@ internal static class Setup
 {
     public static WebApplicationBuilder Configure(this WebApplicationBuilder builder)
     {
-        builder.Services.AddOrdersBusiness();
+        builder.Services.AddKitchenHellBusiness();
         builder.Services.AddOrdersPersistence();
-
-        builder.Services.AddRestaurantsBusiness();
         builder.Services.AddRestaurantsPersistence();
 
         builder.Services.AddHealthChecks();

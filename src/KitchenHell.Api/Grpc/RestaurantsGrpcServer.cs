@@ -1,8 +1,8 @@
 using Grpc.Core;
 using KitchenHell.Api.Grpc.Generated.Restaurants;
-using KitchenHell.Restaurants.Business.Restaurants;
+using KitchenHell.Business.Restaurants.Services;
 using Restaurant = KitchenHell.Api.Grpc.Generated.Restaurants.Restaurant;
-using RestaurantModel = KitchenHell.Restaurants.Business.Restaurants.Restaurant;
+using RestaurantModel = KitchenHell.Business.Restaurants.Restaurant;
 
 namespace KitchenHell.Api.Grpc;
 

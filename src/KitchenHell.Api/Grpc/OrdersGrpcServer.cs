@@ -1,7 +1,7 @@
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using KitchenHell.Api.Grpc.Generated.Orders;
-using KitchenHell.Orders.Business.Orders.Services;
+using KitchenHell.Business.Orders.Services;
 
 namespace KitchenHell.Api.Grpc;
 
@@ -45,7 +45,7 @@ public class OrdersGrpcServer : OrdersSvc.OrdersSvcBase
         return result;
     }
 
-    private static Order MapToGrpcOrder(Orders.Business.Orders.Order order)
+    private static Order MapToGrpcOrder(Business.Orders.Order order)
     {
         return new Order
         {

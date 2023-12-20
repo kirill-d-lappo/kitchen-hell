@@ -14,10 +14,9 @@
     <ItemGroup>
         <ProjectReference Include="..\KitchenHell.Common.GrpcServices\KitchenHell.Common.GrpcServices.csproj" />
         <ProjectReference Include="..\KitchenHell.Common.Web\KitchenHell.Common.Web.csproj" />
-        <ProjectReference Include="..\KitchenHell.Orders.Business\KitchenHell.Orders.Business.csproj" />
-        <ProjectReference Include="..\KitchenHell.Orders.Persistence\KitchenHell.Orders.Persistence.csproj" />
-        <ProjectReference Include="..\KitchenHell.Restaurants.Business\KitchenHell.Restaurants.Business.csproj" />
-        <ProjectReference Include="..\KitchenHell.Restaurants.Persistence\KitchenHell.Restaurants.Persistence.csproj" />
+        <ProjectReference Include="..\KitchenHell.Business\KitchenHell.Business.csproj" />
+        <ProjectReference Include="..\KitchenHell.Persistence.Orders\KitchenHell.Persistence.Orders.csproj" />
+        <ProjectReference Include="..\KitchenHell.Persistence.Restaurants\KitchenHell.Persistence.Restaurants.csproj" />
     </ItemGroup>
 
     <ItemGroup>

@@ -1,0 +1,10 @@
+namespace KitchenHell.Business.Orders.Messages;
+
+public class OrderStatusUpdatedMessage
+{
+    public long OrderId { get; set; }
+
+    public OrderStatus NewStatus { get; set; }
+
+    public DateTimeOffset Timestamp { get; set; }
+}
