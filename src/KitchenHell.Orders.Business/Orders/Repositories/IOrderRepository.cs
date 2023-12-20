@@ -1,10 +1,10 @@
-namespace KitchenHell.Orders.Business.Orders.Services;
+namespace KitchenHell.Orders.Business.Orders.Repositories;
 
 public interface IOrderRepository
 {
-    Task<long> InsertAsync(Order order, CancellationToken ct);
+    Task<long> InsertAsync(OrderEntity order, CancellationToken ct);
 
-    Task<Order> GetOrderByIdAsync(long id, CancellationToken ct);
+    Task<OrderEntity> GetOrderByIdAsync(long id, CancellationToken ct);
 
     Task UpdateOrderStatusAsync(long id, OrderStatus status, CancellationToken ct);
 

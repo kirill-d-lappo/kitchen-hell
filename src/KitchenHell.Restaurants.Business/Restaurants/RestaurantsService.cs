@@ -1,3 +1,5 @@
+using KitchenHell.Restaurants.Business.Restaurants.Repositories;
+
 namespace KitchenHell.Restaurants.Business.Restaurants;
 
 internal class RestaurantsService : IRestaurantsService
@@ -13,6 +15,24 @@ internal class RestaurantsService : IRestaurantsService
     {
         var restaurants = await _restaurantRepository.GetRestaurantsAsync(ct);
 
-        return restaurants;
+        return restaurants.Select(MapToDomain)
+            .ToList();
+    }
+
+    private static Restaurant MapToDomain(RestaurantEntity restaurant)
+    {
+        if (restaurant == default)
+        {
+            return default;
+        }
+
+        return new Restaurant
+        {
+            Id = restaurant.Id,
+            Name = restaurant.Name,
+            FullAddress = restaurant.FullAddress,
+            Latitude = restaurant.Latitude,
+            Longitude = restaurant.Longitude,
+        };
     }
 }

@@ -1,6 +1,6 @@
-namespace KitchenHell.Orders.Business.Orders;
+namespace KitchenHell.Orders.Business.Orders.Repositories;
 
-public class Order
+public class OrderEntity
 {
     public long Id { get; set; }
 

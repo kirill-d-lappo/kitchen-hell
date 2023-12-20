@@ -7,7 +7,7 @@ namespace KitchenHell.Orders.Persistence;
 /// <summary>
 /// For <c>dotnet ef </c> commands.
 /// </summary>
-public class OrdersDbContextDesignTimeFactory : IDesignTimeDbContextFactory<OrdersDbContext>
+internal class OrdersDbContextDesignTimeFactory : IDesignTimeDbContextFactory<OrdersDbContext>
 {
     public OrdersDbContext CreateDbContext(string[] args)
     {

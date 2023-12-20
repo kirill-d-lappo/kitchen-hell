@@ -19,8 +19,7 @@ public class OrdersGrpcServer : OrdersSvc.OrdersSvcBase
         var ct = context.CancellationToken;
         var createParams = new CreateOrderParams
         {
-            RestaurantId = request.RestaurantId,
-            CreatedAt = request.CreatedAt?.ToDateTimeOffset(),
+            RestaurantId = request.RestaurantId, CreatedAt = request.CreatedAt?.ToDateTimeOffset(),
         };
 
         var orderId = await _orderService.CreateOrderAsync(createParams, ct);
@@ -50,8 +49,7 @@ public class OrdersGrpcServer : OrdersSvc.OrdersSvcBase
     {
         return new Order
         {
-            OrderId = order.Id,
-            CreatedAt = order.CreatedAt.ToTimestamp(),
+            OrderId = order.Id, CreatedAt = order.CreatedAt.ToTimestamp(),
         };
     }
 }

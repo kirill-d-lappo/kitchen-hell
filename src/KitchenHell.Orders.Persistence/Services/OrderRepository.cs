@@ -1,4 +1,5 @@
 using KitchenHell.Orders.Business.Orders;
+using KitchenHell.Orders.Business.Orders.Repositories;
 using KitchenHell.Orders.Business.Orders.Services;
 using KitchenHell.Orders.Persistence.Models;
 using Microsoft.EntityFrameworkCore;
@@ -17,12 +18,12 @@ internal class OrderRepository : IOrderRepository
         _logger = logger;
     }
 
-    public async Task<long> InsertAsync(Order order, CancellationToken ct)
+    public async Task<long> InsertAsync(OrderEntity order, CancellationToken ct)
     {
         await using var dbContext = await _dbContextFactory.CreateDbContextAsync(ct);
 
-        var orderEntity = new OrderEntity();
-        MapToEntity(order, orderEntity);
+        var orderEntity = new OrderEfEntity();
+        MapToEfEntity(order, orderEntity);
 
         var orderEntry = await dbContext.Orders.AddAsync(orderEntity, ct);
         await dbContext.SaveChangesAsync(ct);
@@ -30,14 +31,14 @@ internal class OrderRepository : IOrderRepository
         return orderEntry.Entity.Id;
     }
 
-    public async Task<Order> GetOrderByIdAsync(long id, CancellationToken ct)
+    public async Task<OrderEntity> GetOrderByIdAsync(long id, CancellationToken ct)
     {
         await using var dbContext = await _dbContextFactory.CreateDbContextAsync(ct);
 
         var orderEntity = await dbContext.Orders.FirstAsync(o => o.Id == id, ct);
 
-        var order = new Order();
-        MapToModel(orderEntity, order);
+        var order = new OrderEntity();
+        MapToEntity(orderEntity, order);
 
         return order;
     }
@@ -78,7 +79,7 @@ internal class OrderRepository : IOrderRepository
         await dbContext.SaveChangesAsync(ct);
     }
 
-    private static void MapToModel(OrderEntity from, Order to)
+    private static void MapToEntity(OrderEfEntity from, OrderEntity to)
     {
         to.Id = from.Id;
         to.CreatedAt = from.CreatedAt;
@@ -88,7 +89,7 @@ internal class OrderRepository : IOrderRepository
         to.DeliveryStatus = from.DeliveryStatus;
     }
 
-    private static void MapToEntity(Order from, OrderEntity to)
+    private static void MapToEfEntity(OrderEntity from, OrderEfEntity to)
     {
         to.RestaurantId = from.RestaurantId;
         to.CreatedAt = from.CreatedAt;

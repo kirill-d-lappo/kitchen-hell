@@ -1,4 +1,5 @@
 using KitchenHell.Restaurants.Business.Restaurants;
+using KitchenHell.Restaurants.Business.Restaurants.Repositories;
 using KitchenHell.Restaurants.Persistence.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,7 +14,7 @@ internal class RestaurantRepository : IRestaurantRepository
         _dbContextFactory = dbContextFactory;
     }
 
-    public async Task<IEnumerable<Restaurant>> GetRestaurantsAsync(CancellationToken ct)
+    public async Task<IEnumerable<RestaurantEntity>> GetRestaurantsAsync(CancellationToken ct)
     {
         await using var dbContext = await _dbContextFactory.CreateDbContextAsync(ct);
 
@@ -22,14 +23,14 @@ internal class RestaurantRepository : IRestaurantRepository
             .ToList();
     }
 
-    private static Restaurant MapToRestaurant(RestaurantEntity arg)
+    private static RestaurantEntity MapToRestaurant(RestaurantEfEntity arg)
     {
         if (arg == default)
         {
             return default;
         }
 
-        return new Restaurant
+        return new RestaurantEntity
         {
             Id = arg.Id,
             Name = arg.Name,

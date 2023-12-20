@@ -1,4 +1,5 @@
 using KitchenHell.Messaging.Consumers;
+using KitchenHell.Orders.Business.Orders.Repositories;
 using KitchenHell.Orders.Business.Orders.Services;
 
 namespace KitchenHell.Orders.Business.Messages.Consumers;

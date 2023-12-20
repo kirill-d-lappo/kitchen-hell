@@ -1,6 +1,7 @@
 using KitchenHell.Orders.Business.Common;
 using KitchenHell.Orders.Business.Messages;
 using KitchenHell.Orders.Business.Messages.Producers;
+using KitchenHell.Orders.Business.Orders.Repositories;
 
 namespace KitchenHell.Orders.Business.Orders.Services;
 
@@ -23,7 +24,7 @@ internal class OrderService : IOrderService
     public async Task<long> CreateOrderAsync(CreateOrderParams createParams, CancellationToken ct)
     {
         var now = _dateTimeProvider.UtcNow;
-        var order = new Order();
+        var order = new OrderEntity();
 
         order.RestaurantId = createParams.RestaurantId;
         order.CreatedAt = createParams.CreatedAt.GetValueOrDefault(now);
@@ -35,8 +36,7 @@ internal class OrderService : IOrderService
 
         var createdMessage = new OrderCreatedMessage
         {
-            OrderId = orderId,
-            RestaurantId = createParams.RestaurantId,
+            OrderId = orderId, RestaurantId = createParams.RestaurantId,
         };
 
         await _orderCreatedMessageProducer.ProduceAsync(createdMessage, ct);
@@ -46,6 +46,26 @@ internal class OrderService : IOrderService
 
     public async Task<Order> GetOrderByIdAsync(long id, CancellationToken ct)
     {
-        return await _orderRepository.GetOrderByIdAsync(id, ct);
+        var order = await _orderRepository.GetOrderByIdAsync(id, ct);
+
+        return MapToDomain(order);
+    }
+
+    private static Order MapToDomain(OrderEntity order)
+    {
+        if (order == default)
+        {
+            return default;
+        }
+
+        return new Order
+        {
+            Id = order.Id,
+            CreatedAt = order.CreatedAt,
+            RestaurantId = order.RestaurantId,
+            OrderStatus = order.OrderStatus,
+            RestaurantStatus = order.RestaurantStatus,
+            DeliveryStatus = order.DeliveryStatus,
+        };
     }
 }

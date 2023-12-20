@@ -24,8 +24,7 @@ public class KafkaMessageProduceService<TKey, TValue> : IMessageProduceService<T
         {
             var message = new Message<TKey, TValue>
             {
-                Key = key,
-                Value = value,
+                Key = key, Value = value,
             };
 
             await _producer.ProduceAsync(topic, message, ct);

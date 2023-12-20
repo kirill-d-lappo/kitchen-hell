@@ -15,5 +15,5 @@ public class RestaurantsDbContext : DbContext
         modelBuilder.HasDefaultSchema(DatabaseConfigurations.Schema);
     }
 
-    public DbSet<RestaurantEntity> Restaurants { get; set; }
+    internal DbSet<RestaurantEfEntity> Restaurants { get; set; }
 }

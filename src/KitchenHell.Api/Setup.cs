@@ -45,7 +45,7 @@ internal static class Setup
     public static async Task MigrateDatabasesAsync(this WebApplication app)
     {
         await app.MigrateAsync<OrdersDbContext>(CancellationToken.None);
-        await app.MigrateAsync<OrdersDbContext>(CancellationToken.None);
+        await app.MigrateAsync<RestaurantsDbContext>(CancellationToken.None);
     }
 
     public static async Task RunWithConsoleCancellationAsync(this WebApplication app)
