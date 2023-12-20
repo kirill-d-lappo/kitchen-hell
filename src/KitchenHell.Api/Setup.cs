@@ -2,7 +2,7 @@ using KitchenHell.Api.Grpc;
 using KitchenHell.Common.GrpcServices;
 using KitchenHell.Common.Web;
 using KitchenHell.Business;
-using KitchenHell.Business.Orders.Messages;
+using KitchenHell.Business.Orders.Messaging;
 using KitchenHell.Persistence.Orders;
 using KitchenHell.Persistence.Restaurants;
 using Microsoft.EntityFrameworkCore;

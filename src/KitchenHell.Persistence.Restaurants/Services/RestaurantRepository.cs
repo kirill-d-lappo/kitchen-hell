@@ -18,11 +18,20 @@ internal class RestaurantRepository : IRestaurantRepository
         await using var dbContext = await _dbContextFactory.CreateDbContextAsync(ct);
 
         return dbContext.Restaurants
-            .Select(MapToRestaurant)
+            .Select(MapToDomain)
             .ToList();
     }
 
-    private static RestaurantEntity MapToRestaurant(RestaurantEfEntity arg)
+    public async Task CreateRestaurantOrderAsync(RestaurantOrderEntity newOrder, CancellationToken ct)
+    {
+        var entity = MapToEntity(newOrder);
+
+        await using var dbContext = await _dbContextFactory.CreateDbContextAsync(ct);
+
+        await dbContext.RestaurantOrders.AddAsync(entity, ct);
+    }
+
+    private static RestaurantEntity MapToDomain(RestaurantEfEntity arg)
     {
         if (arg == default)
         {
@@ -36,6 +45,20 @@ internal class RestaurantRepository : IRestaurantRepository
             FullAddress = arg.FullAddress,
             Latitude = arg.Latitude,
             Longitude = arg.Longitude,
+        };
+    }
+
+    private static RestaurantOrderEfEntity MapToEntity(RestaurantOrderEntity arg)
+    {
+        if (arg == default)
+        {
+            return default;
+        }
+
+        return new RestaurantOrderEfEntity
+        {
+            OrderId = arg.OrderId,
+            RestaurantId = arg.RestaurantId,
         };
     }
 }

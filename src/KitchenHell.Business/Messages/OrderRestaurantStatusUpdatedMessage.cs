@@ -1,4 +1,6 @@
-namespace KitchenHell.Business.Orders.Messages;
+using KitchenHell.Business.Orders;
+
+namespace KitchenHell.Business.Messages;
 
 public class OrderRestaurantStatusUpdatedMessage
 {

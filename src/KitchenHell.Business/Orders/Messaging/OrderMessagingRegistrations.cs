@@ -1,9 +1,10 @@
-using KitchenHell.Business.Orders.Messages.Consumers;
-using KitchenHell.Business.Orders.Messages.Producers;
+using KitchenHell.Business.Messages;
+using KitchenHell.Business.Orders.Messaging.Consumers;
+using KitchenHell.Business.Orders.Messaging.Producers;
 using KitchenHell.Messaging.Kafka;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace KitchenHell.Business.Orders.Messages;
+namespace KitchenHell.Business.Orders.Messaging;
 
 public static class OrderMessagingRegistrations
 {

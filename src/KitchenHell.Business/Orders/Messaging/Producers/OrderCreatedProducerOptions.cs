@@ -1,4 +1,4 @@
-namespace KitchenHell.Business.Orders.Messages.Producers;
+namespace KitchenHell.Business.Orders.Messaging.Producers;
 
 public sealed record OrderCreatedProducerOptions
 {

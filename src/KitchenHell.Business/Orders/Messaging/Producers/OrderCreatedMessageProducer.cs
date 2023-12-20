@@ -1,7 +1,8 @@
+using KitchenHell.Business.Messages;
 using KitchenHell.Messaging.Producers;
 using Microsoft.Extensions.Options;
 
-namespace KitchenHell.Business.Orders.Messages.Producers;
+namespace KitchenHell.Business.Orders.Messaging.Producers;
 
 internal class OrderCreatedMessageProducer : IOrderCreatedMessageProducer
 {

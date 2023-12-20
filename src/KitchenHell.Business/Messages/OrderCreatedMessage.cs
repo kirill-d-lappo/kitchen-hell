@@ -1,4 +1,4 @@
-namespace KitchenHell.Business.Orders.Messages;
+namespace KitchenHell.Business.Messages;
 
 public class OrderCreatedMessage
 {

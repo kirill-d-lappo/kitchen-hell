@@ -16,4 +16,6 @@ public class RestaurantsDbContext : DbContext
     }
 
     internal DbSet<RestaurantEfEntity> Restaurants { get; set; }
+
+    internal DbSet<RestaurantOrderEfEntity> RestaurantOrders { get; set; }
 }

@@ -1,6 +1,7 @@
 using KitchenHell.Business.Common;
-using KitchenHell.Business.Orders.Messages;
-using KitchenHell.Business.Orders.Messages.Producers;
+using KitchenHell.Business.Messages;
+using KitchenHell.Business.Orders.Messaging;
+using KitchenHell.Business.Orders.Messaging.Producers;
 using KitchenHell.Business.Orders.Repositories;
 
 namespace KitchenHell.Business.Orders.Services;
@@ -36,7 +37,8 @@ internal class OrderService : IOrderService
 
         var createdMessage = new OrderCreatedMessage
         {
-            OrderId = orderId, RestaurantId = createParams.RestaurantId,
+            OrderId = orderId,
+            RestaurantId = createParams.RestaurantId,
         };
 
         await _orderCreatedMessageProducer.ProduceAsync(createdMessage, ct);

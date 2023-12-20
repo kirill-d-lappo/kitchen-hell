@@ -1,4 +1,6 @@
-namespace KitchenHell.Business.Orders.Messages.Producers;
+using KitchenHell.Business.Messages;
+
+namespace KitchenHell.Business.Orders.Messaging.Producers;
 
 public interface IOrderCreatedMessageProducer
 {
