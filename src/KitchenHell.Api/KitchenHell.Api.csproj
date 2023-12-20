@@ -26,10 +26,10 @@
 
     <ItemGroup>
         <Protobuf Include="..\..\protos\orders-svc.proto" GrpcServices="Server" ProtoRoot="..\..\protos">
-            <Link>Grpcs\Protos\orders-svc.proto</Link>
+            <Link>Grpc\Protos\orders-svc.proto</Link>
         </Protobuf>
         <Protobuf Include="..\..\protos\restaurants-svc.proto" GrpcServices="Server" ProtoRoot="..\..\protos">
-            <Link>Grpcs\Protos\restaurants-svc.proto</Link>
+            <Link>Grpc\Protos\restaurants-svc.proto</Link>
         </Protobuf>
     </ItemGroup>
 

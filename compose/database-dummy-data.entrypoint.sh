@@ -1,7 +1,8 @@
 set -e
 
-sleepTime=5s
+sleepTime=10s
 echo "Waiting for $sleepTime to let the db warm up"
+
 sleep $sleepTime
 
 echo "Inserting base data"
