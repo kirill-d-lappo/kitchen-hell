@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace KitchenHell.Orders.Business.Messages;
 
-public static class MessagingRegistrations
+public static class OrderMessagingRegistrations
 {
     public static void AddOrdersMessaging(this IServiceCollection services)
     {

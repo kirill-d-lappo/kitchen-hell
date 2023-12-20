@@ -1,28 +1,15 @@
 ﻿# kitchen-hell
 name: kh
 services:
-  restaurant-api:
-    image: kitchenhell-restaurants-api
+  api:
+    image: kitchenhell-api
     build:
       context: ../
-      dockerfile: ./src/KitchenHell.Restaurants.Api/Dockerfile
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__Restaurants=Server=database;Initial Catalog=kh;User Id=kitchen;Password=OpenAI@2023;Persist Security Info=False;Encrypt=False;Connection Timeout=30;
-    depends_on:
-      database-gates:
-        condition: service_completed_successfully
-    ports:
-      - 9082:8080
-
-  orders-api:
-    image: kitchenhell-orders-api
-    build:
-      context: ../
-      dockerfile: ./src/KitchenHell.Orders.Api/Dockerfile
+      dockerfile: ./src/KitchenHell.Api/Dockerfile
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       ConnectionStrings__Orders: Server=database;Initial Catalog=kh;User Id=kitchen;Password=OpenAI@2023;Persist Security Info=False;Encrypt=False;Connection Timeout=30;
+      ConnectionStrings__Restaurants: Server=database;Initial Catalog=kh;User Id=kitchen;Password=OpenAI@2023;Persist Security Info=False;Encrypt=False;Connection Timeout=30;
       Messaging__Consumers__Settings__Kafka__BootstrapServers: "broker-1:29091,broker-2:29092"
       Messaging__Producers__Settings__Kafka__BootstrapServers: "broker-1:29091,broker-2:29092"
     depends_on:
@@ -42,9 +29,7 @@ services:
     depends_on:
       database-gates:
         condition: service_completed_successfully
-      orders-api:
-        condition: service_started
-      restaurant-api:
+      api:
         condition: service_started
 
   database-gates:

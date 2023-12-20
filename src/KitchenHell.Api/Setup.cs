@@ -1,16 +1,22 @@
+using KitchenHell.Api.Grpc;
 using KitchenHell.Common.GrpcServices;
 using KitchenHell.Common.Web;
-using KitchenHell.Restaurants.Api.Grpcs;
+using KitchenHell.Orders.Business;
+using KitchenHell.Orders.Business.Messages;
+using KitchenHell.Orders.Persistence;
 using KitchenHell.Restaurants.Business;
 using KitchenHell.Restaurants.Persistence;
 using Microsoft.EntityFrameworkCore;
 
-namespace KitchenHell.Restaurants.Api;
+namespace KitchenHell.Api;
 
 internal static class Setup
 {
     public static WebApplicationBuilder Configure(this WebApplicationBuilder builder)
     {
+        builder.Services.AddOrdersBusiness();
+        builder.Services.AddOrdersPersistence();
+
         builder.Services.AddRestaurantsBusiness();
         builder.Services.AddRestaurantsPersistence();
 
@@ -18,6 +24,8 @@ internal static class Setup
 
         builder.Services.AddGrpcServices();
         builder.Host.AddLogging();
+
+        builder.Services.AddOrdersMessaging();
 
         return builder;
     }
@@ -29,16 +37,33 @@ internal static class Setup
         app.MapGrpcHealthChecksService();
         app.MapGrpcReflectionService();
 
-        app.MapRestaurantsGrpcServer();
+        app.MapKitchenHellGrpcServer();
 
         return app;
     }
 
-    public static async Task MigrateAndRunAsync(this WebApplication app)
+    public static async Task MigrateDatabasesAsync(this WebApplication app)
     {
-        await app.MigrateAsync<RestaurantsDbContext>(CancellationToken.None);
+        await app.MigrateAsync<OrdersDbContext>(CancellationToken.None);
+        await app.MigrateAsync<OrdersDbContext>(CancellationToken.None);
+    }
 
-        await app.RunAsync();
+    public static async Task RunWithConsoleCancellationAsync(this WebApplication app)
+    {
+        var cts = new CancellationTokenSource();
+
+        Console.CancelKeyPress += ConsoleCancelKeyPress;
+
+        await app.RunAsync(cts.Token);
+
+        return;
+
+        void ConsoleCancelKeyPress(object sender, ConsoleCancelEventArgs e)
+        {
+            app.Logger.LogWarning("Cancelling server execution...");
+            cts.Cancel();
+            e.Cancel = true;
+        }
     }
 
     private static async Task MigrateAsync<TDbContext>(this IHost app, CancellationToken ct)

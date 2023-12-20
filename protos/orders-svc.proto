@@ -1,5 +1,5 @@
 syntax = "proto3";
-option csharp_namespace = "KitchenHell.GrpcGen.Orders";
+option csharp_namespace = "KitchenHell.Api.Grpc.Generated.Orders";
 
 import "google/protobuf/timestamp.proto";
 

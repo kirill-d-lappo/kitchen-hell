@@ -1,10 +1,10 @@
 using Grpc.Core;
-using KitchenHell.GrpcGen.Restaurants;
+using KitchenHell.Api.Grpc.Generated.Restaurants;
 using KitchenHell.Restaurants.Business.Restaurants;
-using Restaurant = KitchenHell.GrpcGen.Restaurants.Restaurant;
+using Restaurant = KitchenHell.Api.Grpc.Generated.Restaurants.Restaurant;
 using RestaurantModel = KitchenHell.Restaurants.Business.Restaurants.Restaurant;
 
-namespace KitchenHell.Restaurants.Api.Grpcs;
+namespace KitchenHell.Api.Grpc;
 
 public class RestaurantsGrpcServer : RestaurantsSvc.RestaurantsSvcBase
 {
