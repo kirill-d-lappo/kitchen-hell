@@ -10,12 +10,6 @@ public static class OrderMessagingRegistrations
 {
     public static void AddOrdersMessaging(this IServiceCollection services)
     {
-        services.AddKafkaJsonConsumer<string, OrderStatusUpdatedMessage>("OrderStatusUpdates")
-            .AddHandler<OrderStatusUpdatedMessageHandler>();
-
-        services.AddKafkaJsonConsumer<string, OrderRestaurantStatusUpdatedMessage>("OrderRestaurantStatusUpdates")
-            .AddHandler<OrderRestaurantStatusUpdatedMessageHandler>();
-
         services.AddKafkaJsonProducer<string, OrderCreatedMessage>();
 
         services.AddProducerOptions<OrderCreatedProducerOptions>(OrderCreatedProducerOptions.Name);

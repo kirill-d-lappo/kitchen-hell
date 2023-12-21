@@ -14,6 +14,8 @@ public static class OrdersBusinessRegistrations
         services.AddOrdersBusiness();
         services.AddRestaurantsBusiness();
 
+        services.AddKitchenHellBusinessMessaging();
+
         return services;
     }
 
