@@ -1,6 +1,6 @@
-namespace KitchenHell.Messaging.Kafka.Generators;
+namespace KitchenHell.Common;
 
-internal static class StringExtensions
+public static class StringExtensions
 {
   public static string TrimEnd(this string source, string value)
   {

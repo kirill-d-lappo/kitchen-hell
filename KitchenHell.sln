@@ -41,6 +41,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KitchenHell.Messaging.Kafka
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KitchenHell.Messaging.Kafka.Generators", "src\KitchenHell.Messaging.Kafka.Generators\KitchenHell.Messaging.Kafka.Generators.csproj", "{04F50B5F-67E2-49B8-8963-EF5BB7ABD5DD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KitchenHell.ActivityGenerators", "src\KitchenHell.ActivityGenerators\KitchenHell.ActivityGenerators.csproj", "{5BF0914F-364D-42E5-B966-B85733F1D5D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KitchenHell.Common", "KitchenHell.Common\KitchenHell.Common.csproj", "{2FA792E9-BD61-411F-A07D-08234F4AEE06}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +87,14 @@ Global
 		{04F50B5F-67E2-49B8-8963-EF5BB7ABD5DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{04F50B5F-67E2-49B8-8963-EF5BB7ABD5DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{04F50B5F-67E2-49B8-8963-EF5BB7ABD5DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BF0914F-364D-42E5-B966-B85733F1D5D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BF0914F-364D-42E5-B966-B85733F1D5D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BF0914F-364D-42E5-B966-B85733F1D5D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BF0914F-364D-42E5-B966-B85733F1D5D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FA792E9-BD61-411F-A07D-08234F4AEE06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FA792E9-BD61-411F-A07D-08234F4AEE06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FA792E9-BD61-411F-A07D-08234F4AEE06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FA792E9-BD61-411F-A07D-08234F4AEE06}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{D88D2B72-9652-4809-B57F-2BD0D7F1D35E} = {36A88B30-230D-4338-9139-5F11A1A20FBF}
@@ -95,5 +107,7 @@ Global
 		{8775D679-E571-42FE-9634-432B791008A3} = {7EA063B0-8CA5-4AF5-8C13-83DDCF194103}
 		{E244A410-6A38-4F7D-832C-6DC03F9A4872} = {7EA063B0-8CA5-4AF5-8C13-83DDCF194103}
 		{04F50B5F-67E2-49B8-8963-EF5BB7ABD5DD} = {7EA063B0-8CA5-4AF5-8C13-83DDCF194103}
+		{5BF0914F-364D-42E5-B966-B85733F1D5D3} = {36A88B30-230D-4338-9139-5F11A1A20FBF}
+		{2FA792E9-BD61-411F-A07D-08234F4AEE06} = {7EA063B0-8CA5-4AF5-8C13-83DDCF194103}
 	EndGlobalSection
 EndGlobal

@@ -1,8 +1,8 @@
 using System.Text;
 
-namespace KitchenHell.Messaging.Kafka.Generators;
+namespace KitchenHell.Common;
 
-internal static class StringBuilderExtensions
+public static class StringBuilderExtensions
 {
   public static char? Last(this StringBuilder stringBuilder)
   {

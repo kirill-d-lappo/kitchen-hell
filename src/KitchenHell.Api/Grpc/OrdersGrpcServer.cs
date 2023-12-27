@@ -7,49 +7,51 @@ namespace KitchenHell.Api.Grpc;
 
 public class OrdersGrpcServer : OrdersSvc.OrdersSvcBase
 {
-    private readonly IOrderService _orderService;
+  private readonly IOrderService _orderService;
 
-    public OrdersGrpcServer(IOrderService orderService)
+  public OrdersGrpcServer(IOrderService orderService)
+  {
+    _orderService = orderService;
+  }
+
+  public override async Task<CreateOrderResponse> CreateOrder(CreateOrderRequest request, ServerCallContext context)
+  {
+    var ct = context.CancellationToken;
+    var createParams = new CreateOrderParams
     {
-        _orderService = orderService;
-    }
+      RestaurantId = request.RestaurantId,
+      CreatedAt = request.CreatedAt?.ToDateTimeOffset(),
+    };
 
-    public override async Task<CreateOrderResponse> CreateOrder(CreateOrderRequest request, ServerCallContext context)
+    var orderId = await _orderService.CreateOrderAsync(createParams, ct);
+    var result = new CreateOrderResponse
     {
-        var ct = context.CancellationToken;
-        var createParams = new CreateOrderParams
-        {
-            RestaurantId = request.RestaurantId, CreatedAt = request.CreatedAt?.ToDateTimeOffset(),
-        };
+      OrderId = orderId,
+    };
 
-        var orderId = await _orderService.CreateOrderAsync(createParams, ct);
-        var result = new CreateOrderResponse
-        {
-            OrderId = orderId,
-        };
+    return result;
+  }
 
-        return result;
-    }
+  public override async Task<GetOrderResponse> GetOrder(GetOrderRequest request, ServerCallContext context)
+  {
+    var orderId = request.OrderId;
+    var order = await _orderService.GetOrderByIdAsync(orderId, context.CancellationToken);
+    var grpcOrder = MapToGrpcOrder(order);
 
-    public override async Task<GetOrderResponse> GetOrder(GetOrderRequest request, ServerCallContext context)
+    var result = new GetOrderResponse
     {
-        var orderId = request.OrderId;
-        var order = await _orderService.GetOrderByIdAsync(orderId, context.CancellationToken);
-        var grpcOrder = MapToGrpcOrder(order);
+      Order = grpcOrder,
+    };
 
-        var result = new GetOrderResponse
-        {
-            Order = grpcOrder,
-        };
+    return result;
+  }
 
-        return result;
-    }
-
-    private static Order MapToGrpcOrder(Business.Orders.Order order)
+  private static Order MapToGrpcOrder(Business.Orders.Order order)
+  {
+    return new Order
     {
-        return new Order
-        {
-            OrderId = order.Id, CreatedAt = order.CreatedAt.ToTimestamp(),
-        };
-    }
+      OrderId = order.Id,
+      CreatedAt = order.CreatedAt.ToTimestamp(),
+    };
+  }
 }
