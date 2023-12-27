@@ -20,4 +20,11 @@
       <Link>Grpc\Protos\restaurants-svc.proto</Link>
     </Protobuf>
   </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="..\..\.dockerignore">
+      <Link>.dockerignore</Link>
+      <DependentUpon>Dockerfile</DependentUpon>
+    </Content>
+  </ItemGroup>
 </Project>
