@@ -6,12 +6,6 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION
 
-ENV PATH="$PATH:/root/.dotnet/tools"
-
-WORKDIR /repoRoot
-
-RUN dotnet tool install --global dotnet-ef
-
 COPY . .
 RUN dotnet restore "./src/KitchenHell.ActivityGenerators"
 RUN dotnet build "./src/KitchenHell.ActivityGenerators" -c $BUILD_CONFIGURATION --no-restore
@@ -27,6 +21,10 @@ RUN dotnet publish "./src/KitchenHell.ActivityGenerators" -c $BUILD_CONFIGURATIO
 ### Final ###
 #############
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
 EXPOSE 8080
 WORKDIR /app
 COPY --from=publish /app/publish .

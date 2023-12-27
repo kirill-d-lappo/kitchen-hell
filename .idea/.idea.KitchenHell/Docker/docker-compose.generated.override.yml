@@ -1,5 +1,23 @@
 # This is a generated file. Not intended for manual editing.
 services:
+  activity-generators:
+    build:
+      context: "/home/klappo/workspace/learn/KitchenHell"
+      dockerfile: "./src/KitchenHell.ActivityGenerators/Dockerfile"
+      target: "build"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/net8.0/KitchenHell.ActivityGenerators.dll"
+    environment:
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+    image: "kitchenhell-activity-generators:dev"
+    ports: []
+    volumes:
+    - "/home/klappo/.nuget/packages:/root/.nuget/packages"
+    - "/home/klappo/workspace/learn/KitchenHell/src/KitchenHell.ActivityGenerators:/app:rw"
+    - "/home/klappo/workspace/learn/KitchenHell:/src:rw"
+    working_dir: "/app"
   api:
     build:
       context: "/home/klappo/workspace/learn/KitchenHell"
