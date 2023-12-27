@@ -1,11 +1,11 @@
 using System.Text;
 
-namespace KitchenHell.Messaging.Generators;
+namespace KitchenHell.Messaging.Kafka.Generators;
 
 internal class SourceStringBuilder
 {
-    private int _tabLevel = 0;
     private readonly StringBuilder _stringBuilder;
+    private int _tabLevel;
 
     public SourceStringBuilder()
     {
@@ -17,7 +17,7 @@ internal class SourceStringBuilder
         _stringBuilder = new StringBuilder(value);
     }
 
-    public IDisposable StartNestedScope()
+    public IDisposable StartTabulationToRight()
     {
         TabRight();
 
@@ -41,12 +41,12 @@ internal class SourceStringBuilder
         return this;
     }
 
-    private string GetPadded(string value)
+    private string GetTabbed(string value)
     {
-        return $"{GetCurrentTabulation()}{value}";
+        return $"{GetCurrentScopeTabulation()}{value}";
     }
 
-    private string GetCurrentTabulation()
+    private string GetCurrentScopeTabulation()
     {
         if (_tabLevel <= 0)
         {
@@ -58,28 +58,36 @@ internal class SourceStringBuilder
 
     public SourceStringBuilder AppendFormat(string format, object arg0)
     {
-        _stringBuilder.AppendFormat(GetPadded(format), arg0);
+        PadWhenNeeded();
+
+        _stringBuilder.AppendFormat(format, arg0);
 
         return this;
     }
 
     public SourceStringBuilder AppendFormat(string format, object arg0, object arg1)
     {
-        _stringBuilder.AppendFormat(GetPadded(format), arg0, arg1);
+        PadWhenNeeded();
+
+        _stringBuilder.AppendFormat(format, arg0, arg1);
 
         return this;
     }
 
     public SourceStringBuilder AppendFormat(string format, object arg0, object arg1, object arg2)
     {
-        _stringBuilder.AppendFormat(GetPadded(format), arg0, arg1, arg2);
+        PadWhenNeeded();
+
+        _stringBuilder.AppendFormat(format, arg0, arg1, arg2);
 
         return this;
     }
 
     public SourceStringBuilder AppendFormatLine(string format, object arg0)
     {
-        _stringBuilder.AppendFormat(GetPadded(format), arg0);
+        PadWhenNeeded();
+
+        _stringBuilder.AppendFormat(format, arg0);
         _stringBuilder.AppendLine();
 
         return this;
@@ -87,7 +95,9 @@ internal class SourceStringBuilder
 
     public SourceStringBuilder AppendFormatLine(string format, object arg0, object arg1)
     {
-        _stringBuilder.AppendFormat(GetPadded(format), arg0, arg1);
+        PadWhenNeeded();
+
+        _stringBuilder.AppendFormat(format, arg0, arg1);
         _stringBuilder.AppendLine();
 
         return this;
@@ -95,7 +105,9 @@ internal class SourceStringBuilder
 
     public SourceStringBuilder AppendFormatLine(string format, object arg0, object arg1, object arg2)
     {
-        _stringBuilder.AppendFormat(GetPadded(format), arg0, arg1, arg2);
+        PadWhenNeeded();
+
+        _stringBuilder.AppendFormat(format, arg0, arg1, arg2);
         _stringBuilder.AppendLine();
 
         return this;
@@ -103,9 +115,19 @@ internal class SourceStringBuilder
 
     public SourceStringBuilder AppendLine(string format)
     {
-        _stringBuilder.AppendLine(GetPadded(format));
+        PadWhenNeeded();
+
+        _stringBuilder.AppendLine(format);
 
         return this;
+    }
+
+    private void PadWhenNeeded()
+    {
+        if (_stringBuilder.IsLastNewLine())
+        {
+            _stringBuilder.Append(GetCurrentScopeTabulation());
+        }
     }
 
     public SourceStringBuilder AppendLine()

@@ -9,9 +9,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\KitchenHell.Messaging.Generators\KitchenHell.Messaging.Generators.csproj"
-                          OutputItemType="Analyzer"
-                          ReferenceOutputAssembly="false" />
+        <ProjectReference Include="..\KitchenHell.Messaging.Kafka.Generators\KitchenHell.Messaging.Kafka.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
         <ProjectReference Include="..\KitchenHell.Messaging.Kafka\KitchenHell.Messaging.Kafka.csproj" />
     </ItemGroup>
 

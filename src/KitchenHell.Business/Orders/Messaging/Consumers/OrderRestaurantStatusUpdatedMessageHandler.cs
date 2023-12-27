@@ -7,7 +7,7 @@ namespace KitchenHell.Business.Orders.Messaging.Consumers;
 public class OrderRestaurantStatusUpdatedMessageHandler : IMessageHandler<string, OrderRestaurantStatusUpdatedMessage>
 {
     private readonly IOrderRepository _orderRepository;
-
+ 
     public OrderRestaurantStatusUpdatedMessageHandler(IOrderRepository orderRepository)
     {
         _orderRepository = orderRepository;

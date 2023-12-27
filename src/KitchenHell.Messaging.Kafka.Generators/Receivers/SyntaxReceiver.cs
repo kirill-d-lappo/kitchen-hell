@@ -1,8 +1,7 @@
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using CSharpExtensions = Microsoft.CodeAnalysis.CSharp.CSharpExtensions;
 
-namespace KitchenHell.Messaging.Generators.Receivers;
+namespace KitchenHell.Messaging.Kafka.Generators.Receivers;
 
 public class SyntaxReceiver : ISyntaxContextReceiver
 {

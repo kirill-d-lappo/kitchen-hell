@@ -1,5 +1,4 @@
 using KitchenHell.Business.Messages;
-using KitchenHell.Business.Orders.Messaging.Consumers;
 using KitchenHell.Business.Orders.Messaging.Producers;
 using KitchenHell.Messaging.Kafka;
 using Microsoft.Extensions.DependencyInjection;

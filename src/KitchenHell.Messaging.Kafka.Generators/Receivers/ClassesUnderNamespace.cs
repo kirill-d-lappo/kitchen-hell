@@ -1,6 +1,6 @@
 using Microsoft.CodeAnalysis;
 
-namespace KitchenHell.Messaging.Generators.Receivers;
+namespace KitchenHell.Messaging.Kafka.Generators.Receivers;
 
 public class ClassesUnderNamespace : SyntaxReceiver
 {
@@ -15,7 +15,6 @@ public class ClassesUnderNamespace : SyntaxReceiver
 
     protected override bool ShouldCollectClassSymbol(INamedTypeSymbol classSymbol)
     {
-        return true;
         return classSymbol.ContainingNamespace != null
                && classSymbol.ContainingNamespace.ToDisplayString(SymbolDisplayFormat.CSharpShortErrorMessageFormat)
                    .StartsWith(_namespaceName);

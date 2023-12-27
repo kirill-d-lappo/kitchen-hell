@@ -39,7 +39,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KitchenHell.Messaging", "sr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KitchenHell.Messaging.Kafka", "src\KitchenHell.Messaging.Kafka\KitchenHell.Messaging.Kafka.csproj", "{E244A410-6A38-4F7D-832C-6DC03F9A4872}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KitchenHell.Messaging.Generators", "src\KitchenHell.Messaging.Generators\KitchenHell.Messaging.Generators.csproj", "{04F50B5F-67E2-49B8-8963-EF5BB7ABD5DD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KitchenHell.Messaging.Kafka.Generators", "src\KitchenHell.Messaging.Kafka.Generators\KitchenHell.Messaging.Kafka.Generators.csproj", "{04F50B5F-67E2-49B8-8963-EF5BB7ABD5DD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

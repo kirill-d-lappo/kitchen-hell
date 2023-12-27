@@ -1,7 +1,7 @@
 using System.Diagnostics;
 using Microsoft.CodeAnalysis;
 
-namespace KitchenHell.Messaging.Generators.Receivers;
+namespace KitchenHell.Messaging.Kafka.Generators.Receivers;
 
 public static class SymbolExtensions
 {

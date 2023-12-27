@@ -1,4 +1,4 @@
-namespace KitchenHell.Messaging.Generators;
+namespace KitchenHell.Messaging.Kafka.Generators;
 
 internal static class StringExtensions
 {
