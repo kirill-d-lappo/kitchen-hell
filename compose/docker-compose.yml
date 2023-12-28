@@ -27,6 +27,9 @@ services:
       ASPNETCORE_ENVIRONMENT: Development
       Clients__OrdersSvc__Address: http://api:8080
       Clients__RestaurantsSvc__Address: http://api:8080
+    depends_on:
+      api:
+        condition: service_healthy
 
   database-dummy-data:
     image: mcr.microsoft.com/mssql-tools:latest
