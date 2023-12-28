@@ -5,34 +5,60 @@ services:
       context: "/home/klappo/workspace/learn/KitchenHell"
       dockerfile: "./src/KitchenHell.ActivityGenerators/Dockerfile"
       target: "build"
+      args:
+        BUILD_CONFIGURATION: "Debug"
     command: []
     entrypoint:
-    - "dotnet"
-    - "/app/bin/Debug/net8.0/KitchenHell.ActivityGenerators.dll"
+    - "/opt/rider-debugger/linux-x64/dotnet/dotnet"
+    - "/opt/rider-debugger/JetBrains.Debugger.Worker.exe"
+    - "--mode=server"
+    - "--frontend-port=57100"
+    - "--backend-port=57300"
+    - "--timeout=60"
     environment:
       DOTNET_USE_POLLING_FILE_WATCHER: "true"
+      RIDER_DEBUGGER_LOG_DIR: "/var/opt/rider-debugger"
+      RESHARPER_LOG_CONF: "/etc/opt/rider-debugger/backend-log.xml"
     image: "kitchenhell-activity-generators:dev"
-    ports: []
+    ports:
+    - "127.0.0.1:57000:57100"
+    - "127.0.0.1:57200:57300"
     volumes:
     - "/home/klappo/.nuget/packages:/root/.nuget/packages"
     - "/home/klappo/workspace/learn/KitchenHell/src/KitchenHell.ActivityGenerators:/app:rw"
     - "/home/klappo/workspace/learn/KitchenHell:/src:rw"
+    - "/home/klappo/.local/share/JetBrains/RiderRemoteDebugger/2023.3.2/Linux64:/opt/rider-debugger"
+    - "/home/klappo/.local/share/JetBrains/Toolbox/apps/rider/bin:/etc/opt/rider-debugger/backend-log.xml"
+    - "/home/klappo/.cache/JetBrains/Rider2023.3/log/DebuggerWorker/JetBrains.Debugger.Worker.2023_12_28_20_48_42:/var/opt/rider-debugger:rw"
     working_dir: "/app"
   api:
     build:
       context: "/home/klappo/workspace/learn/KitchenHell"
       dockerfile: "./src/KitchenHell.Api/Dockerfile"
       target: "build"
+      args:
+        BUILD_CONFIGURATION: "Debug"
     command: []
     entrypoint:
-    - "dotnet"
-    - "/app/bin/Debug/net8.0/KitchenHell.Api.dll"
+    - "/opt/rider-debugger/linux-x64/dotnet/dotnet"
+    - "/opt/rider-debugger/JetBrains.Debugger.Worker.exe"
+    - "--mode=server"
+    - "--frontend-port=57100"
+    - "--backend-port=57300"
+    - "--timeout=60"
     environment:
       DOTNET_USE_POLLING_FILE_WATCHER: "true"
+      RIDER_DEBUGGER_LOG_DIR: "/var/opt/rider-debugger"
+      RESHARPER_LOG_CONF: "/etc/opt/rider-debugger/backend-log.xml"
     image: "kitchenhell-api:dev"
-    ports: []
+    ports:
+    - "127.0.0.1:57001:57100"
+    - "127.0.0.1:57201:57300"
     volumes:
     - "/home/klappo/.nuget/packages:/root/.nuget/packages"
     - "/home/klappo/workspace/learn/KitchenHell/src/KitchenHell.Api:/app:rw"
     - "/home/klappo/workspace/learn/KitchenHell:/src:rw"
+    - "/home/klappo/.local/share/JetBrains/RiderRemoteDebugger/2023.3.2/Linux64:/opt/rider-debugger"
+    - "/home/klappo/.local/share/JetBrains/Toolbox/apps/rider/bin:/etc/opt/rider-debugger/backend-log.xml"
+    - "/home/klappo/.cache/JetBrains/Rider2023.3/log/DebuggerWorker/JetBrains.Debugger.Worker.2023_12_28_20_48_42:/var/opt/rider-debugger:rw"
     working_dir: "/app"

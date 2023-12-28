@@ -1,3 +1,5 @@
+using System.Net.Sockets;
+using System.Reflection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -17,10 +19,12 @@ public static class GrpcClientRegistrations
   /// <returns></returns>
   public static IHttpClientBuilder AddConfiguredGrpcClient<TClient>(
     this IServiceCollection services,
-    string clientName = nameof(TClient)
+    string clientName = default
   )
     where TClient : class
   {
+    clientName ??= typeof(TClient).Name;
+
     return services
       .AddGrpcClient<TClient>(
         (sp, o) =>
