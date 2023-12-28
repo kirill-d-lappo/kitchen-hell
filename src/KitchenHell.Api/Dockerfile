@@ -48,7 +48,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
+ENV Kestrel__Endpoints__Http__Url=http://0.0.0.0:8080
+ENV Kestrel__Endpoints__Grpc__Url=http://0.0.0.0:58080
 EXPOSE 8080
+EXPOSE 58080
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "KitchenHell.Api.dll"]

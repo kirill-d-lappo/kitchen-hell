@@ -10,13 +10,20 @@ services:
       ASPNETCORE_ENVIRONMENT: Development
       ConnectionStrings__Orders: Server=database;Initial Catalog=kh;User Id=kitchen;Password=OpenAI@2023;Persist Security Info=False;Encrypt=False;Connection Timeout=30;
       ConnectionStrings__Restaurants: Server=database;Initial Catalog=kh;User Id=kitchen;Password=OpenAI@2023;Persist Security Info=False;Encrypt=False;Connection Timeout=30;
-      Messaging__Consumers__Settings__Kafka__BootstrapServers: "broker-1:29091,broker-2:29092"
-      Messaging__Producers__Settings__Kafka__BootstrapServers: "broker-1:29091,broker-2:29092"
+      Messaging__Consumers__Settings__Kafka__BootstrapServers: "broker-n1:29091,broker-n2:29092"
+      Messaging__Producers__Settings__Kafka__BootstrapServers: "broker-n1:29091,broker-n2:29092"
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8080/healthz" ]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
     depends_on:
       database-gates:
         condition: service_completed_successfully
     ports:
-      - 9081:8080
+      - 59081:58080 # grpc
+      - 9081:8080   # http
 
   activity-generators:
     image: kitchenhell-activity-generators
@@ -25,8 +32,8 @@ services:
       dockerfile: ./src/KitchenHell.ActivityGenerators/Dockerfile
     environment:
       ASPNETCORE_ENVIRONMENT: Development
-      Clients__OrdersSvc__Address: http://api:8080
-      Clients__RestaurantsSvc__Address: http://api:8080
+      Clients__OrdersSvc__Address: http://api:58080
+      Clients__RestaurantsSvc__Address: http://api:58080
     depends_on:
       api:
         condition: service_healthy
@@ -78,7 +85,7 @@ services:
       ZOOKEEPER_SYNC_LIMIT: "5"
       ZOOKEEPER_MAX_CLIENT_CONNS: "5"
 
-  broker-1: &broker-base
+  broker-n1: &broker-base
     image: confluentinc/cp-kafka:7.3.2
     ports:
       - "9091:9091"
@@ -86,7 +93,7 @@ services:
       KAFKA_BROKER_ID: "1"
       KAFKA_BROKER_RACK: "1"
       KAFKA_ZOOKEEPER_CONNECT: "zookeeper:2181"
-      KAFKA_ADVERTISED_LISTENERS: LISTENER_INTERNAL://broker-1:29091,LISTENER_LOCAL://localhost:9091
+      KAFKA_ADVERTISED_LISTENERS: LISTENER_INTERNAL://broker-n1:29091,LISTENER_LOCAL://localhost:9091
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: LISTENER_INTERNAL:PLAINTEXT,LISTENER_LOCAL:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: "LISTENER_INTERNAL"
       KAFKA_DEFAULT_REPLICATION_FACTOR: "2"
@@ -96,7 +103,7 @@ services:
     depends_on:
       - zookeeper
 
-  broker-2:
+  broker-n2:
     <<: *broker-base
     ports:
       - "9092:9092"
@@ -104,7 +111,7 @@ services:
       KAFKA_BROKER_ID: "2"
       KAFKA_BROKER_RACK: "2"
       KAFKA_ZOOKEEPER_CONNECT: "zookeeper:2181"
-      KAFKA_ADVERTISED_LISTENERS: LISTENER_INTERNAL://broker-2:29092,LISTENER_LOCAL://localhost:9092
+      KAFKA_ADVERTISED_LISTENERS: LISTENER_INTERNAL://broker-n2:29092,LISTENER_LOCAL://localhost:9092
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: LISTENER_INTERNAL:PLAINTEXT,LISTENER_LOCAL:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: "LISTENER_INTERNAL"
       KAFKA_DEFAULT_REPLICATION_FACTOR: "2"
@@ -117,7 +124,7 @@ services:
   init-kafka:
     image: confluentinc/cp-kafka:7.3.2
     environment:
-      BROKERS: "broker-1:29091,broker-2:29092"
+      BROKERS: "broker-n1:29091,broker-n2:29092"
     entrypoint: [ '/bin/sh', '-c' ]
     command: |
       "
@@ -139,8 +146,8 @@ services:
       kafka-topics --bootstrap-server $${BROKERS} --list
       "
     depends_on:
-      - broker-1
-      - broker-2
+      - broker-n1
+      - broker-n2
 
   kafka-ui:
     container_name: kafka-ui
@@ -149,7 +156,7 @@ services:
       - 8092:8080
     environment:
       KAFKA_CLUSTERS_0_NAME: "kafka-brokers"
-      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: "broker-1:29091,broker-2:29092"
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: "broker-n1:29091,broker-n2:29092"
       AUTH_TYPE: "DISABLED"
       MANAGEMENT_HEALTH_LDAP_ENABLED: "FALSE"
       DYNAMIC_CONFIG_ENABLED: 'true'
