@@ -1,12 +1,12 @@
 set -e
 
+sleepTime=30s
+echo "Waiting for $sleepTime to let the db warm up"
+echo "Database starts to listen to port immediately; however, it may take time to init SQL Server"
+
 portWait=30
 echo "Waiting for MSSQL port is accessible for $portWait seconds"
 /tools/wait-for-it.sh database:1433 -t $portWait
-
-sleepTime=20s
-echo "Waiting for $sleepTime to let the db warm up"
-echo "Database starts to listen to port immediately; however, it may take time to init SQL Server"
 
 sleep $sleepTime
 
