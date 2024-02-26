@@ -36,6 +36,7 @@ services:
       ASPNETCORE_ENVIRONMENT: Development
       Clients__OrdersSvc__Address: http://api:58080
       Clients__RestaurantsSvc__Address: http://api:58080
+      OrdersHostedServiceExecutor__Delay: "00:00:05"
     labels:
       logs/collect: true
     depends_on:
@@ -129,7 +130,7 @@ services:
     image: confluentinc/cp-kafka:7.3.2
     environment:
       BROKERS: "broker-n1:29091,broker-n2:29092"
-    entrypoint: ["/bin/sh", "-c"]
+    entrypoint: [ "/bin/sh", "-c" ]
     command: |
       "
       set -x

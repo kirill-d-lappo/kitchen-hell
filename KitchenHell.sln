@@ -19,7 +19,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "compose", "compose", "{C4C69B62-E5EB-4767-80F2-24DDC534E278}"
 	ProjectSection(SolutionItems) = preProject
 		compose\docker-compose.yml = compose\docker-compose.yml
-		compose\init.sql = compose\init.sql
+		compose\database-init.sql = compose\database-init.sql
 		compose\gates.entrypoint.sh = compose\gates.entrypoint.sh
 		compose\database-dummy-data.entrypoint.sql = compose\database-dummy-data.entrypoint.sql
 		compose\database-dummy-data.entrypoint.sh = compose\database-dummy-data.entrypoint.sh
