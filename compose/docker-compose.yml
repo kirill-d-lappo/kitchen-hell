@@ -13,7 +13,7 @@ services:
       Messaging__Consumers__Settings__Kafka__BootstrapServers: "broker-n1:29091,broker-n2:29092"
       Messaging__Producers__Settings__Kafka__BootstrapServers: "broker-n1:29091,broker-n2:29092"
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:8080/healthz" ]
+      test: curl -f http://localhost:8080/healthz || exit 1
       interval: 30s
       timeout: 5s
       retries: 3
@@ -21,9 +21,11 @@ services:
     depends_on:
       database-gates:
         condition: service_completed_successfully
+    labels:
+      logs/collect: true
     ports:
       - 59081:58080 # grpc
-      - 9081:8080   # http
+      - 9081:8080 # http
 
   activity-generators:
     image: kitchenhell-activity-generators
@@ -34,6 +36,8 @@ services:
       ASPNETCORE_ENVIRONMENT: Development
       Clients__OrdersSvc__Address: http://api:58080
       Clients__RestaurantsSvc__Address: http://api:58080
+    labels:
+      logs/collect: true
     depends_on:
       api:
         condition: service_healthy
@@ -125,7 +129,7 @@ services:
     image: confluentinc/cp-kafka:7.3.2
     environment:
       BROKERS: "broker-n1:29091,broker-n2:29092"
-    entrypoint: [ '/bin/sh', '-c' ]
+    entrypoint: ["/bin/sh", "-c"]
     command: |
       "
       set -x
@@ -159,4 +163,4 @@ services:
       KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: "broker-n1:29091,broker-n2:29092"
       AUTH_TYPE: "DISABLED"
       MANAGEMENT_HEALTH_LDAP_ENABLED: "FALSE"
-      DYNAMIC_CONFIG_ENABLED: 'true'
+      DYNAMIC_CONFIG_ENABLED: "true"
