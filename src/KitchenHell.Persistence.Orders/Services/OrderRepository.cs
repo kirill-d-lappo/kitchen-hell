@@ -17,11 +17,11 @@ internal class OrderRepository : IOrderRepository
     _logger = logger;
   }
 
-  public async Task<long> InsertAsync(OrderEntity order, CancellationToken ct)
+  public async Task<long> InsertAsync(Order order, CancellationToken ct)
   {
     await using var dbContext = await _dbContextFactory.CreateDbContextAsync(ct);
 
-    var orderEntity = new OrderEfEntity();
+    var orderEntity = new OrderEntity();
     MapToEfEntity(order, orderEntity);
 
     var orderEntry = await dbContext.Orders.AddAsync(orderEntity, ct);
@@ -30,13 +30,13 @@ internal class OrderRepository : IOrderRepository
     return orderEntry.Entity.Id;
   }
 
-  public async Task<OrderEntity> GetOrderByIdAsync(long id, CancellationToken ct)
+  public async Task<Order> GetOrderByIdAsync(long id, CancellationToken ct)
   {
     await using var dbContext = await _dbContextFactory.CreateDbContextAsync(ct);
 
     var orderEntity = await dbContext.Orders.FirstAsync(o => o.Id == id, ct);
 
-    var order = new OrderEntity();
+    var order = new Order();
     MapToEntity(orderEntity, order);
 
     return order;
@@ -78,7 +78,7 @@ internal class OrderRepository : IOrderRepository
     await dbContext.SaveChangesAsync(ct);
   }
 
-  private static void MapToEntity(OrderEfEntity from, OrderEntity to)
+  private static void MapToEntity(OrderEntity from, Order to)
   {
     to.Id = from.Id;
     to.CreatedAt = from.CreatedAt;
@@ -88,7 +88,7 @@ internal class OrderRepository : IOrderRepository
     to.DeliveryStatus = from.DeliveryStatus;
   }
 
-  private static void MapToEfEntity(OrderEntity from, OrderEfEntity to)
+  private static void MapToEfEntity(Order from, OrderEntity to)
   {
     to.RestaurantId = from.RestaurantId;
     to.CreatedAt = from.CreatedAt;

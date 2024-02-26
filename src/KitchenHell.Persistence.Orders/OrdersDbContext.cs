@@ -15,5 +15,5 @@ public class OrdersDbContext : DbContext
         modelBuilder.HasDefaultSchema(DatabaseConfigurations.Schema);
     }
 
-    internal DbSet<OrderEfEntity> Orders { get; set; }
+    internal DbSet<OrderEntity> Orders { get; set; }
 }

@@ -25,7 +25,7 @@ internal class OrderService : IOrderService
   public async Task<long> CreateOrderAsync(CreateOrderParams createParams, CancellationToken ct)
   {
     var now = _dateTimeProvider.UtcNow;
-    var order = new OrderEntity();
+    var order = new Order();
 
     order.RestaurantId = createParams.RestaurantId;
     order.CreatedAt = createParams.CreatedAt.GetValueOrDefault(now);
@@ -53,7 +53,7 @@ internal class OrderService : IOrderService
     return MapToDomain(order);
   }
 
-  private static Order MapToDomain(OrderEntity order)
+  private static Order MapToDomain(Order order)
   {
     if (order == default)
     {

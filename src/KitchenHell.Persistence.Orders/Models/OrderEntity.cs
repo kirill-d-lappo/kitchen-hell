@@ -2,7 +2,7 @@ using KitchenHell.Business.Orders;
 
 namespace KitchenHell.Persistence.Orders.Models;
 
-internal class OrderEfEntity
+internal class OrderEntity
 {
     public long Id { get; set; }
 
