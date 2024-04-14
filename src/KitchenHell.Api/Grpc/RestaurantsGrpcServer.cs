@@ -8,41 +8,42 @@ namespace KitchenHell.Api.Grpc;
 
 public class RestaurantsGrpcServer : RestaurantsSvc.RestaurantsSvcBase
 {
-    private readonly IRestaurantsService _restaurantsService;
+  private readonly IRestaurantsService _restaurantsService;
 
-    public RestaurantsGrpcServer(IRestaurantsService restaurantsService)
+  public RestaurantsGrpcServer(IRestaurantsService restaurantsService)
+  {
+    _restaurantsService = restaurantsService;
+  }
+
+  public override async Task<GetAllRestaurantsResponse> GetAllRestaurants(
+    GetAllRestaurantsRequest request,
+    ServerCallContext context
+  )
+  {
+    var restaurants = await _restaurantsService.GetAllRestaurantsAsync(context.CancellationToken);
+
+    var restaurantGrpcs = restaurants.Select(MapToGrpc);
+
+    var response = new GetAllRestaurantsResponse();
+    response.Restaurants.AddRange(restaurantGrpcs);
+
+    return response;
+  }
+
+  private static Restaurant MapToGrpc(RestaurantModel arg)
+  {
+    if (arg == default)
     {
-        _restaurantsService = restaurantsService;
+      return default;
     }
 
-    public override async Task<GetAllRestaurantsResponse> GetAllRestaurants(
-        GetAllRestaurantsRequest request,
-        ServerCallContext context)
+    return new Restaurant
     {
-        var restaurants = await _restaurantsService.GetAllRestaurantsAsync(context.CancellationToken);
-
-        var restaurantGrpcs = restaurants.Select(MapToGrpc);
-
-        var response = new GetAllRestaurantsResponse();
-        response.Restaurants.AddRange(restaurantGrpcs);
-
-        return response;
-    }
-
-    private static Restaurant MapToGrpc(RestaurantModel arg)
-    {
-        if (arg == default)
-        {
-            return default;
-        }
-
-        return new Restaurant
-        {
-            Id = arg.Id,
-            Name = arg.Name,
-            FullAddress = arg.FullAddress,
-            Latitude = arg.Latitude,
-            Longitude = arg.Longitude,
-        };
-    }
+      Id = arg.Id,
+      Name = arg.Name,
+      FullAddress = arg.FullAddress,
+      Latitude = arg.Latitude,
+      Longitude = arg.Longitude,
+    };
+  }
 }

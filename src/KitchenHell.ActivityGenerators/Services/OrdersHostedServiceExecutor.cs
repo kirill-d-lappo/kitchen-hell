@@ -1,4 +1,3 @@
-using Google.Protobuf.WellKnownTypes;
 using KitchenHell.Api.Grpc.Generated.Orders;
 using KitchenHell.Api.Grpc.Generated.Restaurants;
 using KitchenHell.Common.Grpc.Types;
@@ -10,14 +9,12 @@ namespace KitchenHell.ActivityGenerators.Services;
 // ReSharper disable once ClassNeverInstantiated.Global
 public class OrdersHostedServiceExecutor : IHostedServiceExecutor
 {
-  private readonly IOptions<OrdersHostedServiceExecutorOptions> _optionsSource;
   private readonly ILogger<OrdersHostedServiceExecutor> _logger;
+  private readonly IOptions<OrdersHostedServiceExecutorOptions> _optionsSource;
   private readonly OrdersSvc.OrdersSvcClient _ordersClient;
-  private readonly RestaurantsSvc.RestaurantsSvcClient _restaurantsClient;
 
   private readonly HashSet<long> _restaurantIds = new();
-
-  private OrdersHostedServiceExecutorOptions Options => _optionsSource.Value;
+  private readonly RestaurantsSvc.RestaurantsSvcClient _restaurantsClient;
 
   public OrdersHostedServiceExecutor(
     IOptions<OrdersHostedServiceExecutorOptions> options,
@@ -31,6 +28,8 @@ public class OrdersHostedServiceExecutor : IHostedServiceExecutor
     _ordersClient = ordersClient;
     _restaurantsClient = restaurantsClient;
   }
+
+  private OrdersHostedServiceExecutorOptions Options => _optionsSource.Value;
 
   public async Task ExecuteAsync(CancellationToken ct)
   {

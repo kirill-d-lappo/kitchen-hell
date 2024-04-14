@@ -6,17 +6,17 @@ namespace KitchenHell.Business.Orders.Messaging.Consumers;
 
 public class OrderRestaurantStatusUpdatedMessageHandler : IMessageHandler<string, OrderRestaurantStatusUpdatedMessage>
 {
-    private readonly IOrderRepository _orderRepository;
- 
-    public OrderRestaurantStatusUpdatedMessageHandler(IOrderRepository orderRepository)
-    {
-        _orderRepository = orderRepository;
-    }
+  private readonly IOrderRepository _orderRepository;
 
-    public async Task HandleAsync(string key, OrderRestaurantStatusUpdatedMessage value, CancellationToken ct)
-    {
-        var orderId = value.OrderId;
-        var status = value.NewStatus;
-        await _orderRepository.UpdateRestaurantOrderStatusAsync(orderId, status, ct);
-    }
+  public OrderRestaurantStatusUpdatedMessageHandler(IOrderRepository orderRepository)
+  {
+    _orderRepository = orderRepository;
+  }
+
+  public async Task HandleAsync(string key, OrderRestaurantStatusUpdatedMessage value, CancellationToken ct)
+  {
+    var orderId = value.OrderId;
+    var status = value.NewStatus;
+    await _orderRepository.UpdateRestaurantOrderStatusAsync(orderId, status, ct);
+  }
 }

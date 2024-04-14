@@ -1,7 +1,7 @@
 var app = WebApplication.CreateBuilder(args)
-    .Configure()
-    .Build()
-    .Configure();
+  .Configure()
+  .Build()
+  .Configure();
 
 await app.MigrateDatabasesAsync();
 await app.RunWithConsoleCancellationAsync();

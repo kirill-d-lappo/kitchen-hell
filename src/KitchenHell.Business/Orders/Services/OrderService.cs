@@ -7,9 +7,9 @@ namespace KitchenHell.Business.Orders.Services;
 
 internal class OrderService : IOrderService
 {
-  private readonly IOrderRepository _orderRepository;
   private readonly IDateTimeProvider _dateTimeProvider;
   private readonly IMessageProducer<string, OrderCreatedMessage> _orderCreatedMessageProducer;
+  private readonly IOrderRepository _orderRepository;
 
   public OrderService(
     IOrderRepository orderRepository,

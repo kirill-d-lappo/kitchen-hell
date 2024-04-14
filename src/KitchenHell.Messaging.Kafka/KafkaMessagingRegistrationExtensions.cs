@@ -1,10 +1,10 @@
 using Confluent.Kafka;
+using KitchenHell.Messaging.Consumers;
 using KitchenHell.Messaging.Kafka.Consumers;
 using KitchenHell.Messaging.Kafka.Producers;
+using KitchenHell.Messaging.Producers;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using KitchenHell.Messaging.Consumers;
-using KitchenHell.Messaging.Producers;
 using Microsoft.Extensions.Options;
 
 namespace KitchenHell.Messaging.Kafka;
@@ -39,7 +39,7 @@ public static class KafkaMessagingRegistrationExtensions
     services.AddOptions<KafkaConsumerOptions<TKey, TValue>>()
       .BindTopicConsumerOptions(consumerName);
 
-    services.AddSingleton<IConsumer<TKey, TValue>>(sp =>
+    services.AddSingleton(sp =>
     {
       var configuration = sp.GetService<IConfiguration>();
       var kafkaConsumerConfig = GetKafkaConsumerConfig(configuration);

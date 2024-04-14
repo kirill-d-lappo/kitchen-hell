@@ -6,14 +6,14 @@ namespace KitchenHell.Persistence.Restaurants;
 
 public static class PersistenceRegistrations
 {
-    public static void AddRestaurantsPersistence(this IServiceCollection services)
-    {
-        services.AddPooledDbContextFactory<RestaurantsDbContext>(
-            options =>
-            {
-                options.UseOrdersDatabase();
-            });
+  public static void AddRestaurantsPersistence(this IServiceCollection services)
+  {
+    services.AddPooledDbContextFactory<RestaurantsDbContext>(
+      options =>
+      {
+        options.UseOrdersDatabase();
+      });
 
-        services.AddScoped<IRestaurantRepository, RestaurantRepository>();
-    }
+    services.AddScoped<IRestaurantRepository, RestaurantRepository>();
+  }
 }

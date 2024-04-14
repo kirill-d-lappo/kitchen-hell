@@ -6,62 +6,62 @@ namespace KitchenHell.Messaging.Kafka;
 
 public static class ConsumerBuilderExtensions
 {
-    private static JsonSerializerOptions JsonSerializerOptions
+  private static readonly UInt64Serializer UInt64Serializer = new();
+
+  private static readonly UInt64Deserializer UInt64Deserializer = new();
+
+  private static JsonSerializerOptions JsonSerializerOptions
+  {
+    get
     {
-        get
+      var options = new JsonSerializerOptions
+      {
+        PropertyNameCaseInsensitive = true,
+        Converters =
         {
-            var options = new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true,
-                Converters =
-                {
-                    new JsonStringEnumConverter(),
-                },
-            };
+          new JsonStringEnumConverter(),
+        },
+      };
 
-            return options;
-        }
+      return options;
     }
+  }
 
-    private static readonly UInt64Serializer UInt64Serializer = new();
+  public static ConsumerBuilder<ulong, TValue> SetKeyUInt64Deserializer<TValue>(
+    this ConsumerBuilder<ulong, TValue> builder
+  )
+  {
+    return builder.SetKeyDeserializer(UInt64Deserializer);
+  }
 
-    private static readonly UInt64Deserializer UInt64Deserializer = new();
+  public static ProducerBuilder<ulong, TValue> SetKeyUInt64Serializer<TValue>(
+    this ProducerBuilder<ulong, TValue> builder
+  )
+  {
+    return builder.SetKeySerializer(UInt64Serializer);
+  }
 
-    public static ConsumerBuilder<ulong, TValue> SetKeyUInt64Deserializer<TValue>(
-        this ConsumerBuilder<ulong, TValue> builder
-    )
-    {
-        return builder.SetKeyDeserializer(UInt64Deserializer);
-    }
+  public static ConsumerBuilder<TKey, TValue> SetValueJsonDeserializer<TKey, TValue>(
+    this ConsumerBuilder<TKey, TValue> builder,
+    Action<JsonSerializerOptions> configure = default
+  )
+  {
+    var options = JsonSerializerOptions;
 
-    public static ProducerBuilder<ulong, TValue> SetKeyUInt64Serializer<TValue>(
-        this ProducerBuilder<ulong, TValue> builder
-    )
-    {
-        return builder.SetKeySerializer(UInt64Serializer);
-    }
+    configure?.Invoke(options);
 
-    public static ConsumerBuilder<TKey, TValue> SetValueJsonDeserializer<TKey, TValue>(
-        this ConsumerBuilder<TKey, TValue> builder,
-        Action<JsonSerializerOptions> configure = default
-    )
-    {
-        var options = JsonSerializerOptions;
+    return builder.SetValueDeserializer(new JsonDeserializer<TValue>(options));
+  }
 
-        configure?.Invoke(options);
+  public static ProducerBuilder<TKey, TValue> SetValueJsonSerializer<TKey, TValue>(
+    this ProducerBuilder<TKey, TValue> builder,
+    Action<JsonSerializerOptions> configure = default
+  )
+  {
+    var options = JsonSerializerOptions;
 
-        return builder.SetValueDeserializer(new JsonDeserializer<TValue>(options));
-    }
+    configure?.Invoke(options);
 
-    public static ProducerBuilder<TKey, TValue> SetValueJsonSerializer<TKey, TValue>(
-        this ProducerBuilder<TKey, TValue> builder,
-        Action<JsonSerializerOptions> configure = default
-    )
-    {
-        var options = JsonSerializerOptions;
-
-        configure?.Invoke(options);
-
-        return builder.SetValueSerializer(new JsonSerializer<TValue>(options));
-    }
+    return builder.SetValueSerializer(new JsonSerializer<TValue>(options));
+  }
 }

@@ -5,17 +5,17 @@ namespace KitchenHell.Persistence.Restaurants;
 
 public class RestaurantsDbContext : DbContext
 {
-    public RestaurantsDbContext(DbContextOptions<RestaurantsDbContext> options)
-        : base(options)
-    {
-    }
+  public RestaurantsDbContext(DbContextOptions<RestaurantsDbContext> options)
+    : base(options)
+  {
+  }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        modelBuilder.HasDefaultSchema(DatabaseConfigurations.Schema);
-    }
+  internal DbSet<RestaurantEfEntity> Restaurants { get; set; }
 
-    internal DbSet<RestaurantEfEntity> Restaurants { get; set; }
+  internal DbSet<RestaurantOrderEfEntity> RestaurantOrders { get; set; }
 
-    internal DbSet<RestaurantOrderEfEntity> RestaurantOrders { get; set; }
+  protected override void OnModelCreating(ModelBuilder modelBuilder)
+  {
+    modelBuilder.HasDefaultSchema(DatabaseConfigurations.Schema);
+  }
 }

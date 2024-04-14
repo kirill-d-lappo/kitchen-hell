@@ -10,14 +10,16 @@ public static class WebApplicationExtensions
   public static async Task RunScopedServiceAsync<TService>(
     this WebApplication app,
     Func<TService, CancellationToken, Task> runAction,
-    CancellationToken ct)
+    CancellationToken ct
+  )
   {
     await app.Services.RunScopedServiceAsync(runAction, ct);
   }
 
   public static async Task RunWithConsoleCancellationAsync(
     this WebApplication app,
-    Func<WebApplication, CancellationToken, Task> runAction = default)
+    Func<WebApplication, CancellationToken, Task> runAction = default
+  )
   {
     var cts = new CancellationTokenSource();
     var ct = cts.Token;

@@ -10,17 +10,17 @@ public abstract class MessageProducer<TMessageKey, TMessage> : IMessageProducer<
     _produceService = produceService;
   }
 
-  protected abstract string GetTopicName();
-
-  protected virtual TMessageKey GetKey(TMessage message)
-  {
-    return message.GetKey();
-  }
-
   public virtual async Task ProduceAsync(TMessage message, CancellationToken ct)
   {
     var topic = GetTopicName();
     var key = GetKey(message);
     await _produceService.ProduceMessageAsync(key, message, topic, ct);
+  }
+
+  protected abstract string GetTopicName();
+
+  protected virtual TMessageKey GetKey(TMessage message)
+  {
+    return message.GetKey();
   }
 }

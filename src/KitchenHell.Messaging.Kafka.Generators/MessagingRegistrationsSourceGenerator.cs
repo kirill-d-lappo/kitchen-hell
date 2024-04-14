@@ -199,7 +199,7 @@ public class MessagingRegistrationsSourceGenerator : ISourceGenerator
       using (cb.StartTabulationToRight())
       {
         cb.AppendLine(namedType.BaseType?.ToDisplayString());
-        cb.AppendLine("kind: " + namedType.BaseType?.Kind.ToString());
+        cb.AppendLine("kind: " + namedType.BaseType?.Kind);
       }
 
       cb.AppendLine("Interfaces:");

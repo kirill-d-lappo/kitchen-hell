@@ -5,191 +5,193 @@ namespace KitchenHell.Messaging.Kafka.Generators.Receivers;
 
 public class SyntaxReceiver : ISyntaxContextReceiver
 {
-    public List<IMethodSymbol> Methods { get; } = new();
+  public List<IMethodSymbol> Methods { get; } = new();
 
-    public List<IFieldSymbol> Fields { get; } = new();
+  public List<IFieldSymbol> Fields { get; } = new();
 
-    public List<IPropertySymbol> Properties { get; } = new();
+  public List<IPropertySymbol> Properties { get; } = new();
 
-    public List<INamedTypeSymbol> Classes { get; } = new();
+  public List<INamedTypeSymbol> Classes { get; } = new();
 
-    public virtual bool CollectMethodSymbol { get; } = false;
+  public virtual bool CollectMethodSymbol { get; } = false;
 
-    public virtual bool CollectFieldSymbol { get; } = false;
+  public virtual bool CollectFieldSymbol { get; } = false;
 
-    public virtual bool CollectPropertySymbol { get; } = false;
+  public virtual bool CollectPropertySymbol { get; } = false;
 
-    public virtual bool CollectClassSymbol { get; } = false;
+  public virtual bool CollectClassSymbol { get; } = false;
 
-    /// <inheritdoc/>
-    public void OnVisitSyntaxNode(GeneratorSyntaxContext context)
+  /// <inheritdoc />
+  public void OnVisitSyntaxNode(GeneratorSyntaxContext context)
+  {
+    switch (context.Node)
     {
-        switch (context.Node)
-        {
-            case MethodDeclarationSyntax methodDeclarationSyntax:
-                OnVisitMethodDeclaration(methodDeclarationSyntax, context.SemanticModel);
+      case MethodDeclarationSyntax methodDeclarationSyntax:
+        OnVisitMethodDeclaration(methodDeclarationSyntax, context.SemanticModel);
 
-                break;
-            case PropertyDeclarationSyntax propertyDeclarationSyntax:
-                OnVisitPropertyDeclaration(propertyDeclarationSyntax, context.SemanticModel);
+        break;
+      case PropertyDeclarationSyntax propertyDeclarationSyntax:
+        OnVisitPropertyDeclaration(propertyDeclarationSyntax, context.SemanticModel);
 
-                break;
-            case FieldDeclarationSyntax fieldDeclarationSyntax:
-                OnVisitFieldDeclaration(fieldDeclarationSyntax, context.SemanticModel);
+        break;
+      case FieldDeclarationSyntax fieldDeclarationSyntax:
+        OnVisitFieldDeclaration(fieldDeclarationSyntax, context.SemanticModel);
 
-                break;
-            case ClassDeclarationSyntax classDeclarationSyntax:
-                OnVisitClassDeclaration(classDeclarationSyntax, context.SemanticModel);
+        break;
+      case ClassDeclarationSyntax classDeclarationSyntax:
+        OnVisitClassDeclaration(classDeclarationSyntax, context.SemanticModel);
 
-                break;
-        }
+        break;
+    }
+  }
+
+  protected virtual void OnVisitMethodDeclaration(
+    MethodDeclarationSyntax methodDeclarationSyntax,
+    SemanticModel model
+  )
+  {
+    if (!CollectMethodSymbol)
+    {
+      return;
     }
 
-    protected virtual void OnVisitMethodDeclaration(
-        MethodDeclarationSyntax methodDeclarationSyntax,
-        SemanticModel model)
+    if (!ShouldCollectMethodDeclaration(methodDeclarationSyntax))
     {
-        if (!CollectMethodSymbol)
-        {
-            return;
-        }
-
-        if (!ShouldCollectMethodDeclaration(methodDeclarationSyntax))
-        {
-            return;
-        }
-
-        var methodSymbol = model.GetDeclaredSymbol(methodDeclarationSyntax) as IMethodSymbol;
-        if (methodSymbol is null)
-        {
-            return;
-        }
-
-        if (!ShouldCollectMethodSymbol(methodSymbol))
-        {
-            return;
-        }
-
-        Methods.Add(methodSymbol);
+      return;
     }
 
-    protected virtual bool ShouldCollectMethodDeclaration(MethodDeclarationSyntax methodDeclarationSyntax)
+    var methodSymbol = model.GetDeclaredSymbol(methodDeclarationSyntax) as IMethodSymbol;
+    if (methodSymbol is null)
     {
-        return true;
+      return;
     }
 
-    protected virtual bool ShouldCollectMethodSymbol(IMethodSymbol methodSymbol)
+    if (!ShouldCollectMethodSymbol(methodSymbol))
     {
-        return true;
+      return;
     }
 
-    protected virtual void OnVisitFieldDeclaration(FieldDeclarationSyntax fieldDeclarationSyntax, SemanticModel model)
+    Methods.Add(methodSymbol);
+  }
+
+  protected virtual bool ShouldCollectMethodDeclaration(MethodDeclarationSyntax methodDeclarationSyntax)
+  {
+    return true;
+  }
+
+  protected virtual bool ShouldCollectMethodSymbol(IMethodSymbol methodSymbol)
+  {
+    return true;
+  }
+
+  protected virtual void OnVisitFieldDeclaration(FieldDeclarationSyntax fieldDeclarationSyntax, SemanticModel model)
+  {
+    if (!CollectFieldSymbol)
     {
-        if (!CollectFieldSymbol)
-        {
-            return;
-        }
-
-        if (!ShouldCollectFieldDeclaration(fieldDeclarationSyntax))
-        {
-            return;
-        }
-
-        var fieldSymbol = model.GetDeclaredSymbol(fieldDeclarationSyntax) as IFieldSymbol;
-        if (fieldSymbol == null)
-        {
-            return;
-        }
-
-        if (!ShouldCollectFieldSymbol(fieldSymbol))
-        {
-            return;
-        }
-
-        Fields.Add(fieldSymbol);
+      return;
     }
 
-    protected virtual bool ShouldCollectFieldDeclaration(FieldDeclarationSyntax fieldDeclarationSyntax)
+    if (!ShouldCollectFieldDeclaration(fieldDeclarationSyntax))
     {
-        return true;
+      return;
     }
 
-    protected virtual bool ShouldCollectFieldSymbol(IFieldSymbol fieldSymbol)
+    var fieldSymbol = model.GetDeclaredSymbol(fieldDeclarationSyntax) as IFieldSymbol;
+    if (fieldSymbol == null)
     {
-        return true;
+      return;
     }
 
-    protected virtual void OnVisitPropertyDeclaration(
-        PropertyDeclarationSyntax propertyDeclarationSyntax,
-        SemanticModel model)
+    if (!ShouldCollectFieldSymbol(fieldSymbol))
     {
-        if (!CollectPropertySymbol)
-        {
-            return;
-        }
-
-        if (!ShouldCollectPropertyDeclaration(propertyDeclarationSyntax))
-        {
-            return;
-        }
-
-        var propertySymbol = model.GetDeclaredSymbol(propertyDeclarationSyntax) as IPropertySymbol;
-        if (propertySymbol == null)
-        {
-            return;
-        }
-
-        if (!ShouldCollectPropertySymbol(propertySymbol))
-        {
-            return;
-        }
-
-        Properties.Add(propertySymbol);
+      return;
     }
 
-    protected virtual bool ShouldCollectPropertyDeclaration(PropertyDeclarationSyntax propertyDeclarationSyntax)
+    Fields.Add(fieldSymbol);
+  }
+
+  protected virtual bool ShouldCollectFieldDeclaration(FieldDeclarationSyntax fieldDeclarationSyntax)
+  {
+    return true;
+  }
+
+  protected virtual bool ShouldCollectFieldSymbol(IFieldSymbol fieldSymbol)
+  {
+    return true;
+  }
+
+  protected virtual void OnVisitPropertyDeclaration(
+    PropertyDeclarationSyntax propertyDeclarationSyntax,
+    SemanticModel model
+  )
+  {
+    if (!CollectPropertySymbol)
     {
-        return true;
+      return;
     }
 
-    protected virtual bool ShouldCollectPropertySymbol(IPropertySymbol propertySymbol)
+    if (!ShouldCollectPropertyDeclaration(propertyDeclarationSyntax))
     {
-        return true;
+      return;
     }
 
-    protected virtual void OnVisitClassDeclaration(ClassDeclarationSyntax classDeclarationSyntax, SemanticModel model)
+    var propertySymbol = model.GetDeclaredSymbol(propertyDeclarationSyntax) as IPropertySymbol;
+    if (propertySymbol == null)
     {
-        if (!CollectClassSymbol)
-        {
-            return;
-        }
-
-        if (!ShouldCollectClassDeclaration(classDeclarationSyntax))
-        {
-            return;
-        }
-
-        var classSymbol = model.GetDeclaredSymbol(classDeclarationSyntax) as INamedTypeSymbol;
-        if (classSymbol == null)
-        {
-            return;
-        }
-
-        if (!ShouldCollectClassSymbol(classSymbol))
-        {
-            return;
-        }
-
-        Classes.Add(classSymbol);
+      return;
     }
 
-    protected virtual bool ShouldCollectClassDeclaration(ClassDeclarationSyntax classDeclarationSyntax)
+    if (!ShouldCollectPropertySymbol(propertySymbol))
     {
-        return true;
+      return;
     }
 
-    protected virtual bool ShouldCollectClassSymbol(INamedTypeSymbol classSymbol)
+    Properties.Add(propertySymbol);
+  }
+
+  protected virtual bool ShouldCollectPropertyDeclaration(PropertyDeclarationSyntax propertyDeclarationSyntax)
+  {
+    return true;
+  }
+
+  protected virtual bool ShouldCollectPropertySymbol(IPropertySymbol propertySymbol)
+  {
+    return true;
+  }
+
+  protected virtual void OnVisitClassDeclaration(ClassDeclarationSyntax classDeclarationSyntax, SemanticModel model)
+  {
+    if (!CollectClassSymbol)
     {
-        return true;
+      return;
     }
+
+    if (!ShouldCollectClassDeclaration(classDeclarationSyntax))
+    {
+      return;
+    }
+
+    var classSymbol = model.GetDeclaredSymbol(classDeclarationSyntax) as INamedTypeSymbol;
+    if (classSymbol == null)
+    {
+      return;
+    }
+
+    if (!ShouldCollectClassSymbol(classSymbol))
+    {
+      return;
+    }
+
+    Classes.Add(classSymbol);
+  }
+
+  protected virtual bool ShouldCollectClassDeclaration(ClassDeclarationSyntax classDeclarationSyntax)
+  {
+    return true;
+  }
+
+  protected virtual bool ShouldCollectClassSymbol(INamedTypeSymbol classSymbol)
+  {
+    return true;
+  }
 }

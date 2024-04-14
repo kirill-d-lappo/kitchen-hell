@@ -5,12 +5,12 @@ using Microsoft.Extensions.DependencyInjection;
 namespace KitchenHell.Common.Grpc.Registrations;
 
 /// <summary>
-/// Helper methods for grpc client registration.
+///   Helper methods for grpc client registration.
 /// </summary>
 public static class GrpcClientRegistrations
 {
   /// <summary>
-  /// Registers named Grpc client and applies configuration on it.
+  ///   Registers named Grpc client and applies configuration on it.
   /// </summary>
   /// <param name="services"></param>
   /// <param name="clientName"></param>

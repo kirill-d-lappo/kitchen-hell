@@ -6,14 +6,14 @@ namespace KitchenHell.Persistence.Orders;
 
 public static class PersistenceRegistrations
 {
-    public static void AddOrdersPersistence(this IServiceCollection services)
-    {
-        services.AddPooledDbContextFactory<OrdersDbContext>(
-            options =>
-            {
-                options.UseOrdersDatabase();
-            });
+  public static void AddOrdersPersistence(this IServiceCollection services)
+  {
+    services.AddPooledDbContextFactory<OrdersDbContext>(
+      options =>
+      {
+        options.UseOrdersDatabase();
+      });
 
-        services.AddScoped<IOrderRepository, OrderRepository>();
-    }
+    services.AddScoped<IOrderRepository, OrderRepository>();
+  }
 }

@@ -1,16 +1,16 @@
 using Confluent.Kafka;
+using KitchenHell.Messaging.Consumers;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using KitchenHell.Messaging.Consumers;
 using Polly;
 
 namespace KitchenHell.Messaging.Kafka.Consumers;
 
 public class KafkaMessageConsumeService<TKey, TValue> : IMessageConsumeService<TKey, TValue>
 {
-  private readonly ILogger<KafkaMessageConsumeService<TKey, TValue>> _logger;
-  private readonly IMessageHandler<TKey, TValue> _handler;
   private readonly IConsumer<TKey, TValue> _consumer;
+  private readonly IMessageHandler<TKey, TValue> _handler;
+  private readonly ILogger<KafkaMessageConsumeService<TKey, TValue>> _logger;
   private readonly IOptionsMonitor<KafkaConsumerOptions<TKey, TValue>> _optionsMonitor;
 
   private readonly SemaphoreSlim _semaphore = new(0);
@@ -27,6 +27,8 @@ public class KafkaMessageConsumeService<TKey, TValue> : IMessageConsumeService<T
     _consumer = consumer;
     _optionsMonitor = optionsMonitor;
   }
+
+  protected KafkaConsumerOptions<TKey, TValue> ConsumerOptions => _optionsMonitor.CurrentValue;
 
   public async Task ConsumeAsync(CancellationToken ct)
   {
@@ -62,8 +64,6 @@ public class KafkaMessageConsumeService<TKey, TValue> : IMessageConsumeService<T
       _consumer?.Close();
     }
   }
-
-  protected KafkaConsumerOptions<TKey, TValue> ConsumerOptions => _optionsMonitor.CurrentValue;
 
   private async Task ConsumeMessages(CancellationToken ct)
   {

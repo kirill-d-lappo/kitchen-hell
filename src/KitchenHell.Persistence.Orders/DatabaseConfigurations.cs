@@ -5,24 +5,24 @@ namespace KitchenHell.Persistence.Orders;
 
 public static class DatabaseConfigurations
 {
-    public const string DatabaseName = "Orders";
-    public const string Schema = "orders";
+  public const string DatabaseName = "Orders";
+  public const string Schema = "orders";
 
-    public static void UseOrdersDatabase(
-        this DbContextOptionsBuilder optionsBuilder,
-        string connectionString = default
-    )
+  public static void UseOrdersDatabase(
+    this DbContextOptionsBuilder optionsBuilder,
+    string connectionString = default
+  )
+  {
+    if (string.IsNullOrWhiteSpace(connectionString))
     {
-        if (string.IsNullOrWhiteSpace(connectionString))
-        {
-            connectionString = $"name={DatabaseName}";
-        }
-
-        optionsBuilder.UseSqlServer(connectionString, ConfigureRoutesDbContext);
+      connectionString = $"name={DatabaseName}";
     }
 
-    private static void ConfigureRoutesDbContext(SqlServerDbContextOptionsBuilder b)
-    {
-        b.MigrationsHistoryTable("__EFMigrationsHistory", Schema);
-    }
+    optionsBuilder.UseSqlServer(connectionString, ConfigureRoutesDbContext);
+  }
+
+  private static void ConfigureRoutesDbContext(SqlServerDbContextOptionsBuilder b)
+  {
+    b.MigrationsHistoryTable("__EFMigrationsHistory", Schema);
+  }
 }

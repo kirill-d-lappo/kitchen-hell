@@ -6,8 +6,8 @@ public class NamedConfiguredMessageProducer<TMessageKey, TMessage>
   : ConfiguredMessageProducer<TMessageKey, TMessage, MessageProducerOptions>
   where TMessage : IMessage<TMessageKey>
 {
-  private readonly IOptionsSnapshot<MessageProducerOptions> _optionsProvider;
   private readonly string _messageName;
+  private readonly IOptionsSnapshot<MessageProducerOptions> _optionsProvider;
 
   public NamedConfiguredMessageProducer(
     IMessageProduceService<TMessageKey, TMessage> produceService,

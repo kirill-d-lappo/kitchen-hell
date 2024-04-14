@@ -12,6 +12,8 @@ public abstract class ConfiguredMessageProducer<TMessageKey, TMessage, TMessageP
   {
   }
 
+  protected abstract TMessageProducerOptions ProducerOptions { get; }
+
   public override Task ProduceAsync(TMessage message, CancellationToken ct)
   {
     if (!ProducerOptions.IsEnabled)
@@ -21,8 +23,6 @@ public abstract class ConfiguredMessageProducer<TMessageKey, TMessage, TMessageP
 
     return base.ProduceAsync(message, ct);
   }
-
-  protected abstract TMessageProducerOptions ProducerOptions { get; }
 
   protected override string GetTopicName()
   {

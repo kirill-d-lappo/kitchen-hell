@@ -2,5 +2,5 @@ namespace KitchenHell.Business.Common;
 
 internal class DateTimeProvider : IDateTimeProvider
 {
-    public DateTimeOffset UtcNow => DateTimeOffset.UtcNow;
+  public DateTimeOffset UtcNow => DateTimeOffset.UtcNow;
 }

@@ -1,4 +1,3 @@
-using KitchenHell.Messaging.Producers;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace KitchenHell.Messaging.Kafka;

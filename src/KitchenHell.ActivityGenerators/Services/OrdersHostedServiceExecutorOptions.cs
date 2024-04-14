@@ -2,5 +2,5 @@ namespace KitchenHell.ActivityGenerators.Services;
 
 public class OrdersHostedServiceExecutorOptions
 {
-    public TimeSpan Delay { get; set; }
+  public TimeSpan Delay { get; set; }
 }
