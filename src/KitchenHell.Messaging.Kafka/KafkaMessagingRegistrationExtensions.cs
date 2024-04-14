@@ -123,7 +123,7 @@ public static class KafkaMessagingRegistrationExtensions
   private static ConsumerConfig GetKafkaConsumerConfig(IConfiguration configuration)
   {
     var config = new ConsumerConfig();
-    configuration.Bind("Messaging:Consumer:Settings:Kafka", config);
+    configuration.Bind("Messaging:Consumers:Settings:Kafka", config);
 
     return config;
   }
