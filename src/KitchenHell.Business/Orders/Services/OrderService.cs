@@ -39,6 +39,7 @@ internal class OrderService : IOrderService
     {
       OrderId = orderId,
       RestaurantId = createParams.RestaurantId,
+      Timestamp = createParams.CreatedAt ?? DateTimeOffset.UtcNow,
     };
 
     await _orderCreatedMessageProducer.ProduceAsync(createdMessage, ct);
