@@ -23,6 +23,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "compose", "compose", "{C4C6
 		compose\gates.entrypoint.sh = compose\gates.entrypoint.sh
 		compose\database-dummy-data.entrypoint.sql = compose\database-dummy-data.entrypoint.sql
 		compose\database-dummy-data.entrypoint.sh = compose\database-dummy-data.entrypoint.sh
+		compose\up.sh = compose\up.sh
+		compose\down.sh = compose\down.sh
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KitchenHell.Persistence.Restaurants", "src\KitchenHell.Persistence.Restaurants\KitchenHell.Persistence.Restaurants.csproj", "{22F729EF-0FD6-459E-AB91-02795C088353}"
