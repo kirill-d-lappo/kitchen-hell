@@ -2,7 +2,7 @@
 name: kh
 services:
   api:
-    image: kitchenhell-api
+    image: kh-api
     build:
       context: ../
       dockerfile: ./src/KitchenHell.Api/Dockerfile
@@ -28,7 +28,7 @@ services:
       - 9081:8080 # http
 
   activity-generators:
-    image: kitchenhell-activity-generators
+    image: kh-activity-generators
     build:
       context: ../
       dockerfile: ./src/KitchenHell.ActivityGenerators/Dockerfile
