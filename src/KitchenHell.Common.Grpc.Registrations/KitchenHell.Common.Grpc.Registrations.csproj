@@ -12,7 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\KitchenHell.Common\KitchenHell.Common.csproj" />
+    <ProjectReference Include="..\KitchenHell.Common\KitchenHell.Common.csproj" />
   </ItemGroup>
-
 </Project>

@@ -1,6 +1,7 @@
 using Google.Protobuf.WellKnownTypes;
 using KitchenHell.Api.Grpc.Generated.Orders;
 using KitchenHell.Api.Grpc.Generated.Restaurants;
+using KitchenHell.Common.Grpc.Types;
 using KitchenHell.Common.Web.HostedServices;
 using Microsoft.Extensions.Options;
 
@@ -52,7 +53,7 @@ public class OrdersHostedServiceExecutor : IHostedServiceExecutor
     return new CreateOrderRequest
     {
       RestaurantId = restaurantId,
-      CreatedAt = DateTime.UtcNow.ToTimestamp(),
+      CreatedAt = DateTimeOffset.UtcNow.ToTimestampOffset(),
     };
   }
 

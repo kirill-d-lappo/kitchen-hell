@@ -1,7 +1,8 @@
+using Grpc.Core;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace KitchenHell.Common.GrpcServices;
+namespace KitchenHell.Common.Grpc.Registrations;
 
 /// <summary>
 /// Helper methods for grpc client registration.
@@ -19,7 +20,7 @@ public static class GrpcClientRegistrations
     this IServiceCollection services,
     string clientName = default
   )
-    where TClient : class
+    where TClient : ClientBase
   {
     clientName ??= typeof(TClient).Name;
 

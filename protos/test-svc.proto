@@ -1,0 +1,19 @@
+syntax = "proto3";
+option csharp_namespace = "KitchenHell.Api.Grpc.Generated.Orders";
+
+import "kitchenHell/protobuf/timestampOffset.proto";
+
+service TestSvc {
+  rpc ProduceOrderCreatedMessage(ProduceOrderCreatedMessageRequest) returns (ProduceOrderCreatedMessageResponse);
+}
+
+message ProduceOrderCreatedMessageRequest
+{
+  int64 restaurant_id = 1;
+  optional kitchenHell.protobuf.TimestampOffset createdAt = 2;
+}
+
+message ProduceOrderCreatedMessageResponse
+{
+  int64 restaurant_id = 1;
+}

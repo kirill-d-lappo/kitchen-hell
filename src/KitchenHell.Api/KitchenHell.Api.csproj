@@ -1,42 +1,51 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
-    <ItemGroup>
-        <PackageReference Include="Grpc.Tools">
-            <PrivateAssets>all</PrivateAssets>
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Design">
-            <PrivateAssets>all</PrivateAssets>
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>
-    </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Grpc.Tools">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
 
-    <ItemGroup>
-        <ProjectReference Include="..\KitchenHell.Common.GrpcServices\KitchenHell.Common.GrpcServices.csproj" />
-        <ProjectReference Include="..\KitchenHell.Common.Web\KitchenHell.Common.Web.csproj" />
-        <ProjectReference Include="..\KitchenHell.Business\KitchenHell.Business.csproj" />
-        <ProjectReference Include="..\KitchenHell.Persistence.Orders\KitchenHell.Persistence.Orders.csproj" />
-        <ProjectReference Include="..\KitchenHell.Persistence.Restaurants\KitchenHell.Persistence.Restaurants.csproj" />
-    </ItemGroup>
 
-    <ItemGroup>
-        <Using Include="KitchenHell.Api" />
-    </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\KitchenHell.Common.Grpc.Registrations\KitchenHell.Common.Grpc.Registrations.csproj" />
+    <ProjectReference Include="..\KitchenHell.Common.Grpc\KitchenHell.Common.Grpc.csproj" />
+    <ProjectReference Include="..\KitchenHell.Common.Web\KitchenHell.Common.Web.csproj" />
+    <ProjectReference Include="..\KitchenHell.Business\KitchenHell.Business.csproj" />
+    <ProjectReference Include="..\KitchenHell.Persistence.Orders\KitchenHell.Persistence.Orders.csproj" />
+    <ProjectReference Include="..\KitchenHell.Persistence.Restaurants\KitchenHell.Persistence.Restaurants.csproj" />
+  </ItemGroup>
 
-    <ItemGroup>
-        <Protobuf Include="..\..\protos\orders-svc.proto" GrpcServices="Server" ProtoRoot="..\..\protos">
-            <Link>Grpc\Protos\orders-svc.proto</Link>
-        </Protobuf>
-        <Protobuf Include="..\..\protos\restaurants-svc.proto" GrpcServices="Server" ProtoRoot="..\..\protos">
-            <Link>Grpc\Protos\restaurants-svc.proto</Link>
-        </Protobuf>
-    </ItemGroup>
+  <ItemGroup>
+    <Using Include="KitchenHell.Api" />
+  </ItemGroup>
 
-    <ItemGroup>
-        <Content Include="..\..\.dockerignore">
-            <Link>.dockerignore</Link>
-        </Content>
-    </ItemGroup>
+  <!-- Note[2024-04-14 klappo] remove if KitchenHell.Common.Grpc becomes a nuget package -->
+  <Import Project="..\KitchenHell.Common.Grpc\build\KitchenHell.Common.Grpc.props" />
+  <Import Project="..\KitchenHell.Common.Grpc\build\KitchenHell.Common.Grpc.targets" />
+
+  <ItemGroup>
+    <Protobuf Include="..\..\protos\orders-svc.proto" GrpcServices="Server" ProtoRoot="..\..\protos">
+      <Link>Grpc\Protos\orders-svc.proto</Link>
+    </Protobuf>
+    <Protobuf Include="..\..\protos\restaurants-svc.proto" GrpcServices="Server" ProtoRoot="..\..\protos">
+      <Link>Grpc\Protos\restaurants-svc.proto</Link>
+    </Protobuf>
+    <Protobuf Include="..\..\protos\test-svc.proto" GrpcServices="Server" ProtoRoot="..\..\protos">
+      <Link>Grpc\Protos\test-svc.proto</Link>
+    </Protobuf>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="..\..\.dockerignore">
+      <Link>.dockerignore</Link>
+    </Content>
+  </ItemGroup>
+
 
 </Project>
- 

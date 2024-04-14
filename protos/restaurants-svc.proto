@@ -1,8 +1,6 @@
 syntax = "proto3";
 option csharp_namespace = "KitchenHell.Api.Grpc.Generated.Restaurants";
 
-//import "google/protobuf/wrappers.proto";
-
 service RestaurantsSvc {
   rpc GetAllRestaurants(GetAllRestaurantsRequest) returns (GetAllRestaurantsResponse);
 }
@@ -24,4 +22,3 @@ message Restaurant
   double latitude = 4;
   double longitude = 5;
 }
-

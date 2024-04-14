@@ -1,11 +1,17 @@
-using KitchenHell.Messaging.Producers;
+using KitchenHell.Messaging;
 
 namespace KitchenHell.Business.Messages;
 
-[MessagingProducer(typeof(string))]
-public class OrderCreatedMessage
+public class OrderCreatedMessage : IMessage<string>
 {
-    public long OrderId { get; set; }
+  public long OrderId { get; set; }
 
-    public long RestaurantId { get; set; }
+  public long RestaurantId { get; set; }
+
+  public DateTimeOffset Timestamp { get; set; }
+
+  public string GetKey()
+  {
+    return OrderId.ToString();
+  }
 }

@@ -1,7 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
   <ItemGroup>
     <ProjectReference Include="..\KitchenHell.Business\KitchenHell.Business.csproj" />
-    <ProjectReference Include="..\KitchenHell.Common.GrpcServices\KitchenHell.Common.GrpcServices.csproj" />
+    <ProjectReference Include="..\KitchenHell.Common.Grpc.Registrations\KitchenHell.Common.Grpc.Registrations.csproj" />
+    <ProjectReference Include="..\KitchenHell.Common.Grpc\KitchenHell.Common.Grpc.csproj" />
     <ProjectReference Include="..\KitchenHell.Common.Web\KitchenHell.Common.Web.csproj" />
   </ItemGroup>
 
@@ -11,6 +12,10 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
+
+  <!-- Note[2024-04-14 klappo] remove if KitchenHell.Common.Grpc becomes a nuget package -->
+  <Import Project="..\KitchenHell.Common.Grpc\build\KitchenHell.Common.Grpc.props" />
+  <Import Project="..\KitchenHell.Common.Grpc\build\KitchenHell.Common.Grpc.targets" />
 
   <ItemGroup>
     <Protobuf Include="..\..\protos\orders-svc.proto" GrpcServices="Client" ProtoRoot="..\..\protos">

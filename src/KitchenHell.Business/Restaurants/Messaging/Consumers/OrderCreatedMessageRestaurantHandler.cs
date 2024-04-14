@@ -6,23 +6,23 @@ namespace KitchenHell.Business.Restaurants.Messaging.Consumers;
 
 public class OrderCreatedMessageRestaurantHandler : IMessageHandler<string, OrderCreatedMessage>
 {
-    private readonly IRestaurantRepository _repository;
+  private readonly IRestaurantRepository _repository;
 
-    public OrderCreatedMessageRestaurantHandler(IRestaurantRepository repository)
+  public OrderCreatedMessageRestaurantHandler(IRestaurantRepository repository)
+  {
+    _repository = repository;
+  }
+
+  public async Task HandleAsync(string key, OrderCreatedMessage value, CancellationToken ct)
+  {
+    var newOrder = new RestaurantOrderEntity
     {
-        _repository = repository;
-    }
+      OrderId = value.OrderId,
+      RestaurantId = value.RestaurantId,
+    };
 
-    public async Task HandleAsync(string key, OrderCreatedMessage value, CancellationToken ct)
-    {
-        var newOrder = new RestaurantOrderEntity
-        {
-            OrderId = value.OrderId,
-            RestaurantId = value.RestaurantId,
-        };
+    await _repository.CreateRestaurantOrderAsync(newOrder, ct);
 
-        await _repository.CreateRestaurantOrderAsync(newOrder, ct);
-
-        // Todo [2023-12-20 klappo] need restaurant work imitation: wait some time, then send status update messgaes
-    }
+    // Todo [2023-12-20 klappo] need restaurant work imitation: wait some time, then send status update messgaes
+  }
 }

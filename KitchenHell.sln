@@ -29,7 +29,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KitchenHell.Persistence.Res
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "common", "common", "{7EA063B0-8CA5-4AF5-8C13-83DDCF194103}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KitchenHell.Common.GrpcServices", "src\KitchenHell.Common.GrpcServices\KitchenHell.Common.GrpcServices.csproj", "{A7E41378-009D-4D57-8785-7B8847E18633}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KitchenHell.Common.Grpc.Registrations", "src\KitchenHell.Common.Grpc.Registrations\KitchenHell.Common.Grpc.Registrations.csproj", "{A7E41378-009D-4D57-8785-7B8847E18633}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KitchenHell.Common.Web", "src\KitchenHell.Common.Web\KitchenHell.Common.Web.csproj", "{6D8EC475-89BE-4AC1-B068-18672606E971}"
 EndProject
@@ -43,7 +43,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KitchenHell.Messaging.Kafka
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KitchenHell.ActivityGenerators", "src\KitchenHell.ActivityGenerators\KitchenHell.ActivityGenerators.csproj", "{5BF0914F-364D-42E5-B966-B85733F1D5D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KitchenHell.Common", "KitchenHell.Common\KitchenHell.Common.csproj", "{2FA792E9-BD61-411F-A07D-08234F4AEE06}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KitchenHell.Common", "src\KitchenHell.Common\KitchenHell.Common.csproj", "{2FA792E9-BD61-411F-A07D-08234F4AEE06}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KitchenHell.Common.Grpc", "src\KitchenHell.Common.Grpc\KitchenHell.Common.Grpc.csproj", "{8ED341B4-61FA-450E-B13A-8E814298AC16}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -95,6 +97,10 @@ Global
 		{2FA792E9-BD61-411F-A07D-08234F4AEE06}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2FA792E9-BD61-411F-A07D-08234F4AEE06}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2FA792E9-BD61-411F-A07D-08234F4AEE06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8ED341B4-61FA-450E-B13A-8E814298AC16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8ED341B4-61FA-450E-B13A-8E814298AC16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8ED341B4-61FA-450E-B13A-8E814298AC16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8ED341B4-61FA-450E-B13A-8E814298AC16}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{D88D2B72-9652-4809-B57F-2BD0D7F1D35E} = {36A88B30-230D-4338-9139-5F11A1A20FBF}
@@ -109,5 +115,6 @@ Global
 		{04F50B5F-67E2-49B8-8963-EF5BB7ABD5DD} = {7EA063B0-8CA5-4AF5-8C13-83DDCF194103}
 		{5BF0914F-364D-42E5-B966-B85733F1D5D3} = {36A88B30-230D-4338-9139-5F11A1A20FBF}
 		{2FA792E9-BD61-411F-A07D-08234F4AEE06} = {7EA063B0-8CA5-4AF5-8C13-83DDCF194103}
+		{8ED341B4-61FA-450E-B13A-8E814298AC16} = {7EA063B0-8CA5-4AF5-8C13-83DDCF194103}
 	EndGlobalSection
 EndGlobal

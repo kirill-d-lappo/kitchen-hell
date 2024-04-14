@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+
+    <!-- Adds package's proto files to ProtoRoots in target project -->
+
+    <!-- For Nuget packaging -->
+    <KHProto_NugetRoot>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)native/include))</KHProto_NugetRoot>
+    <KHProto_AdditionalImportPath Condition="Exists($(KHProto_NugetRoot))">$(KHProto_NugetRoot)</KHProto_AdditionalImportPath>
+
+    <!-- For In-Solution usage -->
+    <KHProto_ProjectRoot>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)../proto))</KHProto_ProjectRoot>
+    <KHProto_AdditionalImportPath Condition="Exists($(KHProto_ProjectRoot))">$(KHProto_ProjectRoot)</KHProto_AdditionalImportPath>
+  </PropertyGroup>
+</Project>

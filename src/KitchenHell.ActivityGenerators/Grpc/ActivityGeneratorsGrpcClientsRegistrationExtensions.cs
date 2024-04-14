@@ -1,6 +1,6 @@
 using KitchenHell.Api.Grpc.Generated.Orders;
 using KitchenHell.Api.Grpc.Generated.Restaurants;
-using KitchenHell.Common.GrpcServices;
+using KitchenHell.Common.Grpc.Registrations;
 
 namespace KitchenHell.ActivityGenerators.Grpc;
 

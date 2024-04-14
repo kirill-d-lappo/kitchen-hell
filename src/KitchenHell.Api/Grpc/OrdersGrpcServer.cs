@@ -2,6 +2,7 @@ using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using KitchenHell.Api.Grpc.Generated.Orders;
 using KitchenHell.Business.Orders.Services;
+using KitchenHell.Common.Grpc.Types;
 
 namespace KitchenHell.Api.Grpc;
 
@@ -51,7 +52,7 @@ public class OrdersGrpcServer : OrdersSvc.OrdersSvcBase
     return new Order
     {
       OrderId = order.Id,
-      CreatedAt = order.CreatedAt.ToTimestamp(),
+      CreatedAt = order.CreatedAt.ToTimestampOffset(),
     };
   }
 }

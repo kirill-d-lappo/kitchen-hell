@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Configuration;
 
-namespace KitchenHell.Common.GrpcServices;
+namespace KitchenHell.Common.Grpc.Registrations;
 
 /// <summary>
 /// Helper method to bind configuration to grpc client options object.

@@ -1,7 +1,7 @@
 using KitchenHell.Business.Common;
 using KitchenHell.Business.Messages;
-using KitchenHell.Business.Orders.Messaging.Producers;
 using KitchenHell.Business.Orders.Repositories;
+using KitchenHell.Messaging.Producers;
 
 namespace KitchenHell.Business.Orders.Services;
 
@@ -9,12 +9,12 @@ internal class OrderService : IOrderService
 {
   private readonly IOrderRepository _orderRepository;
   private readonly IDateTimeProvider _dateTimeProvider;
-  private readonly IOrderCreatedMessageProducer _orderCreatedMessageProducer;
+  private readonly IMessageProducer<string, OrderCreatedMessage> _orderCreatedMessageProducer;
 
   public OrderService(
     IOrderRepository orderRepository,
     IDateTimeProvider dateTimeProvider,
-    IOrderCreatedMessageProducer orderCreatedMessageProducer
+    IMessageProducer<string, OrderCreatedMessage> orderCreatedMessageProducer
   )
   {
     _orderRepository = orderRepository;

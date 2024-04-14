@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package kitchenHell.protobuf;
+
+option csharp_namespace = "KitchenHell.Protobuf";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
+
+// Grpc representation of System.DateTimeOffset type in dotnet/c# platform
+message TimestampOffset
+{
+  google.protobuf.Timestamp timestamp = 1;  // local date time value (System.DateTimeOffset, DateTime property)
+  google.protobuf.Duration offset = 2;      // offset (System.DateTimeOffset, Offset property)
+}

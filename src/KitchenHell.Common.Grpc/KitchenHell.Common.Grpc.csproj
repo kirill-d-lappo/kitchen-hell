@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+    <VersionPrefix>0.1.0</VersionPrefix>
+    <Title>KitchenHell.Common.Grpc</Title>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Google.Protobuf" />
+    <PackageReference Include="Grpc.Tools">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Protobuf Include="proto\**\*.proto" ProtoRoot="proto\" GrpcServices="None" CompileOutputs="true" />
+    <None Include="proto\**\*.proto" PackagePath="build\native\include\" Pack="true" Visible="false" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="build\KitchenHell.Common.Grpc.props" PackagePath="build\" Pack="true" />
+    <None Include="build\KitchenHell.Common.Grpc.targets" PackagePath="build\" Pack="true" />
+  </ItemGroup>
+
+</Project>
